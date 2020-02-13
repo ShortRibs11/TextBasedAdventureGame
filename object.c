@@ -46,7 +46,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		 1
 	},
 	{	/* 1 = cave */
 		alwaysTrue,
@@ -64,7 +65,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 2 = silver */
 		alwaysTrue,
@@ -82,7 +84,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 3 = gold */
 		alwaysTrue,
@@ -100,7 +103,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 4 = guard */
 		alwaysTrue,
@@ -118,7 +122,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 5 = player */
 		alwaysTrue,
@@ -136,7 +141,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 6 = intoCave */
 		condition6,
@@ -154,7 +160,8 @@ OBJECT objs[] = {
 		 isAlreadyOpen,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 7 = intoCaveBlocked */
 		condition7,
@@ -172,7 +179,8 @@ OBJECT objs[] = {
 		 isAlreadyOpen,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 8 = exitCave */
 		alwaysTrue,
@@ -190,7 +198,8 @@ OBJECT objs[] = {
 		 isAlreadyOpen,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 9 = wallField */
 		alwaysTrue,
@@ -208,7 +217,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 10 = wallCave */
 		alwaysTrue,
@@ -226,7 +236,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 11 = backroom */
 		alwaysTrue,
@@ -244,7 +255,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 12 = wallBackroom */
 		alwaysTrue,
@@ -262,7 +274,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 13 = openDoorToBackroom */
 		alwaysTrue,
@@ -280,7 +293,8 @@ OBJECT objs[] = {
 		 isAlreadyOpen,
 		 toggleBackdoor,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 14 = closedDoorToBackroom */
 		alwaysTrue,
@@ -298,7 +312,8 @@ OBJECT objs[] = {
 		 toggleBackdoor,
 		 isAlreadyClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 15 = openDoorToCave */
 		alwaysTrue,
@@ -316,7 +331,8 @@ OBJECT objs[] = {
 		 isAlreadyOpen,
 		 toggleBackdoor,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 16 = closedDoorToCave */
 		alwaysTrue,
@@ -334,7 +350,8 @@ OBJECT objs[] = {
 		 toggleBackdoor,
 		 isAlreadyClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 17 = openBox */
 		alwaysTrue,
@@ -352,7 +369,8 @@ OBJECT objs[] = {
 		 isAlreadyOpen,
 		 toggleBox,
 		 isStillOpen,
-		 isAlreadyOpen
+		 isAlreadyOpen,
+		0
 	},
 	{	/* 18 = closedBox */
 		alwaysTrue,
@@ -370,7 +388,8 @@ OBJECT objs[] = {
 		 toggleBox,
 		 isAlreadyClosed,
 		 toggleBoxLock,
-		 isAlreadyUnlocked
+		 isAlreadyUnlocked,
+		0
 	},
 	{	/* 19 = lockedBox */
 		alwaysTrue,
@@ -388,7 +407,8 @@ OBJECT objs[] = {
 		 isStillLocked,
 		 isAlreadyClosed,
 		 isAlreadyLocked,
-		 toggleBoxLock
+		 toggleBoxLock,
+		0
 	},
 	{	/* 20 = keyForBox */
 		alwaysTrue,
@@ -406,7 +426,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 21 = lampOff */
 		alwaysTrue,
@@ -424,7 +445,8 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		0
 	},
 	{	/* 22 = lampOn */
 		alwaysTrue,
@@ -442,6 +464,7 @@ OBJECT objs[] = {
 		cannotBeOpened,
 		cannotBeClosed,
 		cannotBeLocked,
-		cannotBeUnlocked
+		cannotBeUnlocked,
+		 1
 	}
 };

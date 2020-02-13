@@ -19,6 +19,7 @@ typedef struct object {
 	const char 		*(*close)(void);
 	const char 		*(*lock)(void);
 	const char 		*(*unlock)(void);
+	int lightSource;
 } OBJECT;
 
 extern OBJECT objs[];
@@ -26,6 +27,7 @@ extern OBJECT objs[];
 - field
 	description "an open field"
 	tags        "field"
+	lightSource	1
 	details			"The field is a nice and quiet place under a clear blue sky.\n"
 	capacity		9999
 
@@ -210,5 +212,6 @@ extern OBJECT objs[];
 - lampOn
 	description	"a lamp"
 	tags				"lamp"
+	lightSource	1
 	details			"The lamp is on.\n"
 	weight			5

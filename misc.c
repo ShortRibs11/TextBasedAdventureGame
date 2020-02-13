@@ -2,18 +2,33 @@
 #include "object.h"
 #include "misc.h"
 
+/*
 static OBJECT *getLocation(OBJECT *obj) {
 	while (obj->location != NULL) obj = obj->location;
 	return obj;
 }
+*/
 
 int isLit(OBJECT *location) {
-	return location == field || location == getLocation(lampOn);
+	if (location == NULL) {
+		return 0;
+	}
+	if (location->lightSource) {
+		return 1;
+	}
+	// Check every object
+	OBJECT *obj;
+	forEachObject(obj) {
+		// If the object is here and generating light, the location is lit.
+		if (obj->location == location && isLit(obj)) {
+			return 1;
+		}
+	}
+	return location->lightSource;
 }
 
 OBJECT *getPassage(OBJECT *from, OBJECT *to) {
 	OBJECT *obj;
-//	for (obj = objs; obj < endOfObjs; obj++) {
 	forEachObject(obj) {
 		if (from != NULL && obj->location == from && obj->prospect == to) {
 			return obj;
@@ -39,7 +54,6 @@ DISTANCE getDistance(OBJECT *from,OBJECT *to) {
 
 OBJECT *actorHere(void) {
 	OBJECT *obj;
-//	for (obj = objs; obj < endOfObjs; obj++) {
 	forEachObject(obj) {
 		if (getDistance(player, obj) == distHere && obj->health > 0) {
 			return obj;
@@ -51,7 +65,6 @@ OBJECT *actorHere(void) {
 int listObjectsAtLocation(OBJECT *location) {
 	int count = 0;
 	OBJECT *obj;
-//	for (obj = objs; obj < endOfObjs; obj++) {
 	forEachObject(obj) {
 		if (obj != player && obj->location == location &&
 				getDistance(player, obj) < distNotHere) {
@@ -67,7 +80,6 @@ int listObjectsAtLocation(OBJECT *location) {
 int weightOfContents(OBJECT *container) {
 	int sum = 0;
 	OBJECT * obj;
-//	for (obj = objs; obj < endOfObjs; obj++) {
 	forEachObject(obj) {
 		if (obj->location == container) {
 			sum += obj->weight;

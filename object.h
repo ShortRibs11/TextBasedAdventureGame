@@ -16,6 +16,7 @@ typedef struct object {
 	const char 		*(*close)(void);
 	const char 		*(*lock)(void);
 	const char 		*(*unlock)(void);
+	int lightSource;
 } OBJECT;
 
 extern OBJECT objs[];
