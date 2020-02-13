@@ -24,6 +24,8 @@ static const char *tags17[] = { "box", "wooden box", NULL};
 static const char *tags18[] = { "box", "wooden box", NULL};
 static const char *tags19[] = { "box", "wooden box", NULL};
 static const char *tags20[] = { "key", "tiny key", NULL};
+static const char *tags21[] = { "lamp", NULL};
+static const char *tags22[] = { "lamp", NULL};
 
 static int alwaysTrue(void) { return 1; }
 
@@ -399,6 +401,42 @@ OBJECT objs[] = {
 		"You see",
 		"You can't get much closer than this.\n",
 		 1,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 21 = lampOff */
+		alwaysTrue,
+		 "a lamp",
+		tags21,
+		 field,
+		NULL,
+		NULL,
+		 "The lamp is off.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 5,
+		0,
+		0,
+		cannotBeOpened,
+		cannotBeClosed,
+		cannotBeLocked,
+		cannotBeUnlocked
+	},
+	{	/* 22 = lampOn */
+		alwaysTrue,
+		 "a lamp",
+		tags22,
+		NULL,
+		NULL,
+		NULL,
+		 "The lamp is on.\n",
+		"You see",
+		"You can't get much closer than this.\n",
+		 5,
 		0,
 		0,
 		cannotBeOpened,

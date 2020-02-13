@@ -2,11 +2,20 @@
 #include "object.h"
 #include "misc.h"
 
+static OBJECT *getLocation(OBJECT *obj) {
+	while (obj->location != NULL) obj = obj->location;
+	return obj;
+}
+
+int isLit(OBJECT *location) {
+	return location == field || location == getLocation(lampOn);
+}
+
 OBJECT *getPassage(OBJECT *from, OBJECT *to) {
 	OBJECT *obj;
 //	for (obj = objs; obj < endOfObjs; obj++) {
 	forEachObject(obj) {
-		if (obj->location == from && obj->prospect == to) {
+		if (from != NULL && obj->location == from && obj->prospect == to) {
 			return obj;
 		}
 	}
@@ -17,6 +26,8 @@ DISTANCE getDistance(OBJECT *from,OBJECT *to) {
 	return	!validObject(to)					? distUnknownObject :
 		to == from									? distSelf :
 		to->location == from				? distHeld :
+		!isLit(from->location) &&
+		!isLit(to) && !isLit(to->prospect)		? distNotHere :
 		to == from->location				? distLocation :
 		to->location == from->location			? distHere :
 		getPassage(from->location, to) != NULL		? distOverThere :
@@ -42,7 +53,8 @@ int listObjectsAtLocation(OBJECT *location) {
 	OBJECT *obj;
 //	for (obj = objs; obj < endOfObjs; obj++) {
 	forEachObject(obj) {
-		if (obj != player && obj->location == location) {
+		if (obj != player && obj->location == location &&
+				getDistance(player, obj) < distNotHere) {
 			if (count++ == 0) {
 				printf("%s\n", location->contents);
 			}

@@ -7,6 +7,7 @@
 #include "inventory.h"
 #include "inventory2.h"
 #include "openclose.h"
+#include "onoff.h"
 
 typedef struct {
 	int (*function)(void);
@@ -50,6 +51,10 @@ int parseAndExecute(char *input) {
 		{executeClose				,	"close A"},
 		{executeLock				,	"lock A"},
 		{executeUnlock			,	"unlock A"},
+		{executeTurnOn			,	"turn on A"},
+		{executeTurnOff			,	"turn off A"},
+		{executeTurnOn			,	"turn A on"},
+		{executeTurnOff			,	"turn A off"},
 		{executeNoMatch			,	"A"}
 	};
 	const COMMAND *cmd;

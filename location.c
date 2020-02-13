@@ -5,7 +5,11 @@
 #include "noun.h"
 
 int executeLookAround(void) {
-	printf("You are in %s.\n", player->location->description);
+	if (isLit(player->location)) {
+		printf("You are in %s.\n", player->location->description);
+	} else {
+		printf("It is very dark in here.\n");
+	}
 	listObjectsAtLocation(player->location);
 	return 1;
 }

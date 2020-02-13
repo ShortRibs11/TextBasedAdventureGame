@@ -1,4 +1,5 @@
-BEGIN               { print "digraph map {"; }
+BEGIN               { print "digraph map {\n\tnode [style=filled, fillcolor=grey]"; }
+/^- field$/         { print "\t" $2 " [fillcolor=white]"; }
 /^- /               { outputEdge(); location = destination = prospect = ""; }
 $1 == "location"    { location = $2; }
 $1 == "destination" { destination = $2; }

@@ -1,4 +1,6 @@
 digraph map {
+	node [style=filled, fillcolor=grey]
+	field [fillcolor=white]
 	field -> cave
 	field -> cave [style=dashed]
 	cave -> field

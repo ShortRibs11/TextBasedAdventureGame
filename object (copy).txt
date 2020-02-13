@@ -19,6 +19,8 @@ typedef struct object {
 	const char 		*(*close)(void);
 	const char 		*(*lock)(void);
 	const char 		*(*unlock)(void);
+	const char 		*(*turnOn)(void);
+	const char 		*(*turnOff)(void);
 } OBJECT;
 
 extern OBJECT objs[];
@@ -205,10 +207,14 @@ extern OBJECT objs[];
 	tags				"lamp"
 	location		field
 	details			"The lamp is off.\n"
+	turnOff			isAlreadyOff
+	turnOn			{ swapLocations(lampOn, lampOff); return "OK.\n"; }
 	weight			5
 
 - lampOn
 	description	"a lamp"
 	tags				"lamp"
 	details			"The lamp is on.\n"
+	turnOn			isAlreadyOn
+	turnOff			{ swapLocations(lampOn, lampOff); return "OK.\n"; }
 	weight			5
