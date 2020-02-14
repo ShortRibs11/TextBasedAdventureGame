@@ -25,16 +25,22 @@ BEGIN {
    prop["close"] = "cannotBeClosed";
    prop["lock"] = "cannotBeLocked";
    prop["unlock"] = "cannotBeUnlocked";
+   prop["turnOn"] = "cannotTurnOn";
+   prop["turnOff"] = "cannotTurnOff";
    prop["lightSource"] = "0"
 }
 obj && /^[ \t]+[a-z]/ {
    name = $1;
    $1 = "";
+   returnType = "const char *";
+   if (name == "condition") {
+      returnType = "int ";
+   }
    if (name in prop) {
       prop[name] = $0;
       if (/^[ \t]*\{/) {
         prop[name] = name count;
-        if (pass == "c1") print "static int " prop[name] "(void) " $0;
+        if (pass == "c1") print "static " returnType prop[name] "(void) " $0;
       }
    }
    else if (pass == "c2") {
@@ -81,6 +87,8 @@ function outputRecord(separator)
          print "\t\t" prop["close"] ",";
          print "\t\t" prop["lock"] ",";
          print "\t\t" prop["unlock"] ",";
+         print "\t\t" prop["turnOn"] ",";
+         print "\t\t" prop["turnOff"] ",";
          print "\t\t" prop["lightSource"];
          print "\t}" separator;
          delete prop;

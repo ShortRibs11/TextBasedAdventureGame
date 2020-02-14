@@ -15,13 +15,13 @@ extern const char *toggleBackdoor(void);
 extern const char *toggleBox(void);
 extern const char *toggleBoxLock(void);
 
+extern void toggleReplace(OBJECT *old, OBJECT *new);
 extern void toggleLamp(void);
 
-/*
+
 extern const char *cannotTurnOn(void);
 extern const char *cannotTurnOff(void);
 extern const char *isAlreadyOn(void);
 extern const char *isAlreadyOff(void);
 
-extern void swapLocations(OBJECT *obj1, OBJECT *obj2);
-*/
+//extern void swapLocations(OBJECT *obj1, OBJECT *obj2);

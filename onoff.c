@@ -6,26 +6,20 @@
 
 int executeTurnOn(void) {
   OBJECT *obj = reachableObject("what you want to turn on", params[0]);
-  if (obj != NULL) {
-    if (obj == lampOff) {
-      toggleLamp();
-    } else {
-      printf(obj == lampOn  ? "The lamp is already on.\n"
-                            : "You cannot turn that on.\n");
-    }
+  if (obj->turnOn == NULL) {
+    printf("%s", cannotTurnOn());
+  } else {
+    printf("%s", (obj->turnOn)());
   }
   return 1;
 }
 
 int executeTurnOff(void) {
   OBJECT *obj = reachableObject("what you want to turn off", params[0]);
-  if (obj != NULL) {
-    if (obj == lampOn) {
-      toggleLamp();
-    } else {
-      printf(obj == lampOff  ? "The lamp is already off.\n"
-                            : "You cannot turn that off.\n");
-    }
+  if (obj->turnOff == NULL) {
+    printf("%s", cannotTurnOff());
+  } else {
+    printf("%s", (obj->turnOff)());
   }
   return 1;
 }

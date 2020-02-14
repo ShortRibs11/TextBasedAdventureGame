@@ -59,5 +59,10 @@ int parseAndExecute(char *input) {
 	};
 	const COMMAND *cmd;
 	for (cmd = commands; !matchCommand(input, cmd->pattern); cmd++);
-	return (*cmd->function)();
+	int exitCode = (*cmd->function)();
+	if (isLookAroundNeeded()) {
+		printf("\n");
+		executeLookAround();
+	}
+	return exitCode;
 }

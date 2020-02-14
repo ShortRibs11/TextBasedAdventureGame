@@ -4,6 +4,8 @@
 #include "match.h"
 #include "noun.h"
 
+static int needLookAround = 0;
+
 int executeLookAround(void) {
 	if (isLit(player->location)) {
 		printf("You are in %s.\n", player->location->description);
@@ -65,4 +67,14 @@ int executeGo(void) {
 		movePlayer(obj);
 	}
 	return 1;
+}
+
+int isLookAroundNeeded(void) {
+	int answer = needLookAround;
+	needLookAround = 0;
+	return answer;
+}
+
+void triggerLookAround(void) {
+	needLookAround = 1;
 }

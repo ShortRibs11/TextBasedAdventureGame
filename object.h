@@ -16,6 +16,8 @@ typedef struct object {
 	const char 		*(*close)(void);
 	const char 		*(*lock)(void);
 	const char 		*(*unlock)(void);
+	const char 		*(*turnOn)(void);
+	const char 		*(*turnOff)(void);
 	int lightSource;
 } OBJECT;
 

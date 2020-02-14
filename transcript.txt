@@ -93,7 +93,7 @@ an exit to the west
 It's too dark.
 
 --> turn lamp on
-OK.
+You turn on the lamp.
 
 You are in a little cave.
 You see
@@ -206,13 +206,13 @@ a cave entrance to the east
 dense forest all around
 
 --> turn lamp on
-The lamp is already on.
+This is already on.
 
 --> turn lamp off
-OK.
+You turn off the lamp.
 
 --> turn lamp off
-The lamp is already off.
+This is already off.
 
 --> drop lamp
 You drop a lamp.
@@ -221,10 +221,10 @@ You drop a lamp.
 You get a silver coin from a burly guard.
 
 --> turn coin on
-You cannot turn that on.
+It doesn't look like this can turn on.
 
 --> turn coin off
-You cannot turn that off.
+It doesn't look like this can turn off.
 
 --> open coin
 That cannot be opened.

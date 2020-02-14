@@ -24,7 +24,9 @@ static const char *tags17[] = { "box", "wooden box", NULL};
 static const char *tags18[] = { "box", "wooden box", NULL};
 static const char *tags19[] = { "box", "wooden box", NULL};
 static const char *tags20[] = { "key", "tiny key", NULL};
+static const char *turnOn21(void)  { toggleReplace(lampOn, lampOff); return "You turn on the lamp.\n"; }
 static const char *tags21[] = { "lamp", NULL};
+static const char *turnOff22(void)  { toggleReplace(lampOn, lampOff); return "You turn off the lamp.\n"; }
 static const char *tags22[] = { "lamp", NULL};
 
 static int alwaysTrue(void) { return 1; }
@@ -47,6 +49,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		 1
 	},
 	{	/* 1 = cave */
@@ -66,6 +70,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 2 = silver */
@@ -85,6 +91,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 3 = gold */
@@ -104,6 +112,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 4 = guard */
@@ -123,6 +133,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 5 = player */
@@ -142,6 +154,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 6 = intoCave */
@@ -161,6 +175,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 7 = intoCaveBlocked */
@@ -180,6 +196,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 8 = exitCave */
@@ -199,6 +217,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 9 = wallField */
@@ -218,6 +238,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 10 = wallCave */
@@ -237,6 +259,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 11 = backroom */
@@ -256,6 +280,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 12 = wallBackroom */
@@ -275,6 +301,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 13 = openDoorToBackroom */
@@ -294,6 +322,8 @@ OBJECT objs[] = {
 		 toggleBackdoor,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 14 = closedDoorToBackroom */
@@ -313,6 +343,8 @@ OBJECT objs[] = {
 		 isAlreadyClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 15 = openDoorToCave */
@@ -332,6 +364,8 @@ OBJECT objs[] = {
 		 toggleBackdoor,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 16 = closedDoorToCave */
@@ -351,6 +385,8 @@ OBJECT objs[] = {
 		 isAlreadyClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 17 = openBox */
@@ -370,6 +406,8 @@ OBJECT objs[] = {
 		 toggleBox,
 		 isStillOpen,
 		 isAlreadyOpen,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 18 = closedBox */
@@ -389,6 +427,8 @@ OBJECT objs[] = {
 		 isAlreadyClosed,
 		 toggleBoxLock,
 		 isAlreadyUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 19 = lockedBox */
@@ -408,6 +448,8 @@ OBJECT objs[] = {
 		 isAlreadyClosed,
 		 isAlreadyLocked,
 		 toggleBoxLock,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 20 = keyForBox */
@@ -427,6 +469,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		cannotTurnOn,
+		cannotTurnOff,
 		0
 	},
 	{	/* 21 = lampOff */
@@ -446,6 +490,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		turnOn21,
+		 isAlreadyOff,
 		0
 	},
 	{	/* 22 = lampOn */
@@ -465,6 +511,8 @@ OBJECT objs[] = {
 		cannotBeClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
+		 isAlreadyOn,
+		turnOff22,
 		 1
 	}
 };

@@ -21,12 +21,12 @@ const char *isAlreadyUnlocked(void){ return "That is already unlocked.\n";    }
 
 const char *isStillOpen(void)      { return "That is still open.\n";    }
 const char *isStillLocked(void)    { return "That is still closed.\n";    }
-/*
+
 const char *cannotTurnOn(void)     { return "It doesn't look like this can turn on.\n"; }
 const char *cannotTurnOff(void)    { return "It doesn't look like this can turn off.\n"; }
 const char *isAlreadyOff(void)     { return "This is already off.\n"; }
 const char *isAlreadyOn(void)      { return "This is already on.\n"; }
-*/
+
 const char *toggleBackdoor(void)   {
   swapLocations(openDoorToBackroom, closedDoorToBackroom);
   swapLocations(openDoorToCave, closedDoorToCave);
@@ -48,12 +48,23 @@ const char *toggleBoxLock(void)    {
 }
 
 void toggleLamp(void) {
-  int oldLit = isLit(player->location);
+/*  int oldLit = isLit(player->location);
   swapLocations(lampOn, lampOff);
   printf("OK.\n");
   if (oldLit != isLit(player->location)) {
     printf("\n");
     executeLookAround();
+  }*/
+}
+
+void toggleReplace(OBJECT *old, OBJECT *new) {
+  int oldLit = isLit(player->location);
+  swapLocations(old, new);
+//  printf("OK.\n");
+  if (oldLit != isLit(player->location)) {
+//    printf("\n");
+//    executeLookAround();
+    triggerLookAround();
   }
 }
 
