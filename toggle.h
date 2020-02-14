@@ -16,10 +16,4 @@ extern const char *cannotTurnOff(void);
 extern const char *isAlreadyOn(void);
 extern const char *isAlreadyOff(void);
 
-/*
-extern const char *toggleBackdoor(void);
-extern const char *toggleBox(void);
-extern const char *toggleBoxLock(void);
-*/
-
 extern void toggleReplace(OBJECT *old, OBJECT *new);
