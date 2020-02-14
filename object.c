@@ -16,12 +16,20 @@ static const char *tags9[] = { "west", "north", "south", "forest", NULL};
 static const char *tags10[] = { "east", "north", "rock", NULL};
 static const char *tags11[] = { "backroom", NULL};
 static const char *tags12[] = { "east", "west", "south", "rock", NULL};
+static const char *close13(void)  { toggleReplace(openDoorToBackroom, closedDoorToBackroom); toggleReplace(openDoorToCave, closedDoorToCave); return "You close the door.\n"; }
 static const char *tags13[] = { "south", "door", "doorway", NULL};
+static const char *open14(void)  { toggleReplace(openDoorToBackroom, closedDoorToBackroom); toggleReplace(openDoorToCave, closedDoorToCave); return "You open the door.\n"; }
 static const char *tags14[] = { "south", "door", "doorway", NULL};
+static const char *close15(void)  { return (*openDoorToBackroom->close)(); }
 static const char *tags15[] = { "north", "door", "doorway", NULL};
+static const char *open16(void)  { return (*closedDoorToBackroom->open)(); }
 static const char *tags16[] = { "north", "door", "doorway", NULL};
+static const char *close17(void)  { toggleReplace(openBox, closedBox); return "You close the box.\n"; }
 static const char *tags17[] = { "box", "wooden box", NULL};
+static const char *open18(void)  { toggleReplace(openBox, closedBox); return "You open the box.\n"; }
+static const char *lock18(void)  { toggleReplace(lockedBox, closedBox); return "You lock the box.\n"; }
 static const char *tags18[] = { "box", "wooden box", NULL};
+static const char *unlock19(void)  { toggleReplace(lockedBox, closedBox); return "You unlock the box.\n"; }
 static const char *tags19[] = { "box", "wooden box", NULL};
 static const char *tags20[] = { "key", "tiny key", NULL};
 static const char *turnOn21(void)  { toggleReplace(lampOn, lampOff); return "You turn on the lamp.\n"; }
@@ -319,7 +327,7 @@ OBJECT objs[] = {
 		0,
 		0,
 		 isAlreadyOpen,
-		 toggleBackdoor,
+		close13,
 		cannotBeLocked,
 		cannotBeUnlocked,
 		cannotTurnOn,
@@ -339,7 +347,7 @@ OBJECT objs[] = {
 		99,
 		0,
 		0,
-		 toggleBackdoor,
+		open14,
 		 isAlreadyClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
@@ -361,7 +369,7 @@ OBJECT objs[] = {
 		0,
 		0,
 		 isAlreadyOpen,
-		 toggleBackdoor,
+		close15,
 		cannotBeLocked,
 		cannotBeUnlocked,
 		cannotTurnOn,
@@ -381,7 +389,7 @@ OBJECT objs[] = {
 		99,
 		0,
 		0,
-		 toggleBackdoor,
+		open16,
 		 isAlreadyClosed,
 		cannotBeLocked,
 		cannotBeUnlocked,
@@ -403,7 +411,7 @@ OBJECT objs[] = {
 		 10,
 		0,
 		 isAlreadyOpen,
-		 toggleBox,
+		close17,
 		 isStillOpen,
 		 isAlreadyOpen,
 		cannotTurnOn,
@@ -423,9 +431,9 @@ OBJECT objs[] = {
 		 5,
 		0,
 		0,
-		 toggleBox,
+		open18,
 		 isAlreadyClosed,
-		 toggleBoxLock,
+		lock18,
 		 isAlreadyUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
@@ -447,7 +455,7 @@ OBJECT objs[] = {
 		 isStillLocked,
 		 isAlreadyClosed,
 		 isAlreadyLocked,
-		 toggleBoxLock,
+		unlock19,
 		cannotTurnOn,
 		cannotTurnOff,
 		0

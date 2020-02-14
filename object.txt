@@ -76,7 +76,7 @@ extern OBJECT objs[];
 	description "a cave entrance to the east"
 	tags        "east", "entrance"
 	location    field
-	destination		cave
+	destination	cave
 	details			"The entrance is just a narrow opening in a small outcrop.\n"
 	textGo			"You walk into the cave.\n"
 	open				isAlreadyOpen
@@ -134,7 +134,7 @@ extern OBJECT objs[];
 	details			"The door is open.\n"
 	textGo			"You walk through the door into a backroom.\n"
 	open				isAlreadyOpen
-	close				toggleBackdoor
+	close				{ toggleReplace(openDoorToBackroom, closedDoorToBackroom); toggleReplace(openDoorToCave, closedDoorToCave); return "You close the door.\n"; }
 
 - closedDoorToBackroom
 	description	"an closed door to the south"
@@ -143,7 +143,7 @@ extern OBJECT objs[];
 	prospect		backroom
 	details			"The door is closed.\n"
 	textGo			"The door is closed.\n"
-	open				toggleBackdoor
+	open				{ toggleReplace(openDoorToBackroom, closedDoorToBackroom); toggleReplace(openDoorToCave, closedDoorToCave); return "You open the door.\n"; }
 	close				isAlreadyClosed
 
 - openDoorToCave
@@ -153,7 +153,7 @@ extern OBJECT objs[];
 	details			"The door is open.\n"
 	textGo			"You walk through the door into a backroom.\n"
 	open				isAlreadyOpen
-	close				toggleBackdoor
+	close				{ return (*openDoorToBackroom->close)(); }
 
 - closedDoorToCave
 	description	"an closed door to the north"
@@ -162,7 +162,7 @@ extern OBJECT objs[];
 	prospect		cave
 	details			"The door is closed.\n"
 	textGo			"The door is closed.\n"
-	open				toggleBackdoor
+	open				{ return (*closedDoorToBackroom->open)(); }
 	close				isAlreadyClosed
 
 - openBox
@@ -172,7 +172,7 @@ extern OBJECT objs[];
 	weight			5
 	capacity		10
 	open				isAlreadyOpen
-	close				toggleBox
+	close				{ toggleReplace(openBox, closedBox); return "You close the box.\n"; }
 	lock				isStillOpen
 	unlock			isAlreadyOpen
 
@@ -181,9 +181,9 @@ extern OBJECT objs[];
 	tags				"box", "wooden box"
 	details			"The box is closed.\n"
 	weight			5
-	open				toggleBox
+	open				{ toggleReplace(openBox, closedBox); return "You open the box.\n"; }
 	close				isAlreadyClosed
-	lock				toggleBoxLock
+	lock				{ toggleReplace(lockedBox, closedBox); return "You lock the box.\n"; }
 	unlock			isAlreadyUnlocked
 
 - lockedBox
@@ -195,7 +195,7 @@ extern OBJECT objs[];
 	open				isStillLocked
 	close				isAlreadyClosed
 	lock				isAlreadyLocked
-	unlock			toggleBoxLock
+	unlock			{ toggleReplace(lockedBox, closedBox); return "You unlock the box.\n"; }
 
 - keyForBox
 	description	"a tiny key"

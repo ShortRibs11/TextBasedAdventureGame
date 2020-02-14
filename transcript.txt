@@ -123,7 +123,7 @@ You are not holding any coin.
 The door is closed.
 
 --> open door
-OK.
+You open the door.
 
 --> go south
 You walk through the door into a backroom.
@@ -141,13 +141,13 @@ That is still closed.
 The key seems to fit the lock alright.
 
 --> unlock box
-OK.
+You unlock the box.
 
 --> unlock box
 That is already unlocked.
 
 --> open box
-OK.
+You open the box.
 
 --> look box
 The box is open.
@@ -164,10 +164,10 @@ You put a gold coin in a wooden box.
 That is still open.
 
 --> close box
-OK.
+You close the box.
 
 --> lock box
-OK.
+You lock the box.
 
 --> lock box
 That is already locked.
@@ -179,7 +179,7 @@ You drop a tiny key.
 That is already locked.
 
 --> unlock box
-You don't have a key.
+You unlock the box.
 
 --> get key
 You pick up a tiny key.

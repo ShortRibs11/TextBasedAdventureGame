@@ -49,10 +49,6 @@ static void movePlayer(OBJECT *passage) {
 
 int executeGo(void) {
 	OBJECT *obj = getVisible("where you want to go", params[0]);
-/*	if (obj == NULL) {
-		// already handled by getVisible
-	} else if (getPassage(player->location, obj) != NULL) {
-*/
 	switch (getDistance(player, obj)) {
 	case distOverThere:
 		movePlayer(getPassage(player->location, obj));

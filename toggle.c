@@ -27,6 +27,7 @@ const char *cannotTurnOff(void)    { return "It doesn't look like this can turn 
 const char *isAlreadyOff(void)     { return "This is already off.\n"; }
 const char *isAlreadyOn(void)      { return "This is already on.\n"; }
 
+/*
 const char *toggleBackdoor(void)   {
   swapLocations(openDoorToBackroom, closedDoorToBackroom);
   swapLocations(openDoorToCave, closedDoorToCave);
@@ -46,36 +47,12 @@ const char *toggleBoxLock(void)    {
   return "You don't have a key.\n";
   }
 }
-
-void toggleLamp(void) {
-/*  int oldLit = isLit(player->location);
-  swapLocations(lampOn, lampOff);
-  printf("OK.\n");
-  if (oldLit != isLit(player->location)) {
-    printf("\n");
-    executeLookAround();
-  }*/
-}
+*/
 
 void toggleReplace(OBJECT *old, OBJECT *new) {
   int oldLit = isLit(player->location);
   swapLocations(old, new);
-//  printf("OK.\n");
   if (oldLit != isLit(player->location)) {
-//    printf("\n");
-//    executeLookAround();
     triggerLookAround();
   }
 }
-
-/*
-const char *toggleOn(OBJECT *obj) {
-  swapLocations(obj, obj->turnOn);
-  printf("OK.\n");
-}
-
-const char *toggleOff(OBJECT *obj) {
-  swapLocations(obj, obj->turnOff);
-  printf("OK.\n");
-}
-*/

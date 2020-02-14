@@ -93,7 +93,7 @@ an exit to the west
 It's too dark.
 
 --> turn lamp on
-OK.
+You turn on the lamp.
 
 You are in a little cave.
 You see
@@ -123,7 +123,7 @@ You are not holding any coin.
 The door is closed.
 
 --> open door
-OK.
+You open the door.
 
 --> go south
 You walk through the door into a backroom.
@@ -141,13 +141,13 @@ That is still closed.
 The key seems to fit the lock alright.
 
 --> unlock box
-OK.
+You unlock the box.
 
 --> unlock box
 That is already unlocked.
 
 --> open box
-OK.
+You open the box.
 
 --> look box
 The box is open.
@@ -164,10 +164,10 @@ You put a gold coin in a wooden box.
 That is still open.
 
 --> close box
-OK.
+You close the box.
 
 --> lock box
-OK.
+You lock the box.
 
 --> lock box
 That is already locked.
@@ -179,7 +179,7 @@ You drop a tiny key.
 That is already locked.
 
 --> unlock box
-You don't have a key.
+You unlock the box.
 
 --> get key
 You pick up a tiny key.
@@ -206,13 +206,13 @@ a cave entrance to the east
 dense forest all around
 
 --> turn lamp on
-The lamp is already on.
+This is already on.
 
 --> turn lamp off
-OK.
+You turn off the lamp.
 
 --> turn lamp off
-The lamp is already off.
+This is already off.
 
 --> drop lamp
 You drop a lamp.
@@ -221,10 +221,10 @@ You drop a lamp.
 You get a silver coin from a burly guard.
 
 --> turn coin on
-You cannot turn that on.
+It doesn't look like this can turn on.
 
 --> turn coin off
-You cannot turn that off.
+It doesn't look like this can turn off.
 
 --> open coin
 That cannot be opened.
