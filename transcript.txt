@@ -21,7 +21,7 @@ You should not be doing that to yourself.
 
 --> get silver coin
 You pick up a silver coin.
-
+OK, Boomer.
 --> get coin
 You already have a silver coin.
 
@@ -219,7 +219,7 @@ You drop a lamp.
 
 --> ask coin
 You get a silver coin from a burly guard.
-
+OK, Boomer.
 --> turn coin on
 It doesn't look like this can turn on.
 

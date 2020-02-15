@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "object.h"
+#include "move.h"
 #include "toggle.h"
+#include "string.h"
 
 typedef struct object {
 	int				 (*condition)(void);
@@ -21,6 +23,8 @@ typedef struct object {
 	const char 		*(*unlock)(void);
 	const char 		*(*turnOn)(void);
 	const char 		*(*turnOff)(void);
+	const char 		*(*customGet)(void);
+	const char 		*(*customAsk)(struct object*);
 	int lightSource;
 } OBJECT;
 
@@ -44,6 +48,7 @@ extern OBJECT objs[];
 	tags        "silver", "coin", "silver coin"
 	location    field
 	details			"The coin has an eagle on the obverse.\n"
+	customGet		{ moveObject(silver, player); return "OK, Boomer."; }
 	weight 1
 
 - gold

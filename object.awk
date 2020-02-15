@@ -27,6 +27,8 @@ BEGIN {
    prop["unlock"] = "cannotBeUnlocked";
    prop["turnOn"] = "cannotTurnOn";
    prop["turnOff"] = "cannotTurnOff";
+   prop["customGet"] = "NULL";
+   prop["customAsk"] = "NULL";
    prop["lightSource"] = "0"
 }
 obj && /^[ \t]+[a-z]/ {
@@ -35,6 +37,10 @@ obj && /^[ \t]+[a-z]/ {
    returnType = "const char *";
    if (name == "condition") {
       returnType = "int ";
+   }
+   params = "void";
+   if (name == "customAsk") {
+      params = "OBJECT* obj";
    }
    if (name in prop) {
       prop[name] = $0;
@@ -89,6 +95,8 @@ function outputRecord(separator)
          print "\t\t" prop["unlock"] ",";
          print "\t\t" prop["turnOn"] ",";
          print "\t\t" prop["turnOff"] ",";
+         print "\t\t" prop["customGet"] ",";
+         print "\t\t" prop["customAsk"] ",";
          print "\t\t" prop["lightSource"];
          print "\t}" separator;
          delete prop;

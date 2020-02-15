@@ -24,7 +24,11 @@ int executeGet(void) {
 		if (obj->location != NULL && obj->location->health > 0) {
 			printf("You should ask %s nicely.\n", obj->location->description);
 		} else {
-			moveObject(obj, player);
+			if (obj->customGet != NULL) {
+				printf("%s", (*obj->customGet)());
+			} else {
+				moveObject(obj, player);
+			}
 		}
 	}
 	return 1;
@@ -36,7 +40,14 @@ int executeDrop(void) {
 }
 
 int executeAsk(void) {
-	moveObject(getPossession(actorHere(), "ask", params[0]), player);
+	OBJECT *obj = getPossession(actorHere(), "ask", params[0]);
+	if (obj != NULL) {
+		if (obj->customGet != NULL) {
+			printf("%s", (*obj->customGet)());
+			return 1;
+		}
+	}
+	moveObject(obj, player);
 	return 1;
 }
 

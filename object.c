@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include "object.h"
+#include "move.h"
 #include "toggle.h"
+#include "string.h"
 static const char *tags0[] = { "field", NULL};
 static const char *tags1[] = { "cave", NULL};
+static const char *customGet2(void)  { moveObject(silver, player); return "OK, Boomer."; }
 static const char *tags2[] = { "silver", "coin", "silver coin", NULL};
 static const char *tags3[] = { "gold", "coin", "gold coin", NULL};
 static const char *tags4[] = { "guard", "burly guard", NULL};
@@ -59,6 +62,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		 1
 	},
 	{	/* 1 = cave */
@@ -80,6 +85,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 2 = silver */
@@ -101,6 +108,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		customGet2,
+		NULL,
 		0
 	},
 	{	/* 3 = gold */
@@ -122,6 +131,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 4 = guard */
@@ -143,6 +154,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 5 = player */
@@ -164,6 +177,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 6 = intoCave */
@@ -185,6 +200,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 7 = intoCaveBlocked */
@@ -206,6 +223,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 8 = exitCave */
@@ -227,6 +246,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 9 = wallField */
@@ -248,6 +269,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 10 = wallCave */
@@ -269,6 +292,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 11 = backroom */
@@ -290,6 +315,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 12 = wallBackroom */
@@ -311,6 +338,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 13 = openDoorToBackroom */
@@ -332,6 +361,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 14 = closedDoorToBackroom */
@@ -353,6 +384,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 15 = openDoorToCave */
@@ -374,6 +407,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 16 = closedDoorToCave */
@@ -395,6 +430,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 17 = openBox */
@@ -416,6 +453,8 @@ OBJECT objs[] = {
 		 isAlreadyOpen,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 18 = closedBox */
@@ -437,6 +476,8 @@ OBJECT objs[] = {
 		 isAlreadyUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 19 = lockedBox */
@@ -458,6 +499,8 @@ OBJECT objs[] = {
 		unlock19,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 20 = keyForBox */
@@ -479,6 +522,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 21 = lampOff */
@@ -500,6 +545,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		turnOn21,
 		 isAlreadyOff,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 22 = lampOn */
@@ -521,6 +568,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		 isAlreadyOn,
 		turnOff22,
+		NULL,
+		NULL,
 		 1
 	}
 };
