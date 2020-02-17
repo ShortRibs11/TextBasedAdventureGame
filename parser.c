@@ -35,10 +35,12 @@ int parseAndExecute(char *input) {
 		{executeLookAround	,	"look around"},
 		{executeLook				,	"look at A"},
 		{executeLook				,	"look A"},
+		{executeLook				,	"examine A"},
 		{executeGo					,	"go to A"},
 		{executeGo					,	"go A"},
 		{executeGetFrom			,	"get A from B"},
 		{executeGet					,	"get A"},
+		{executeExtinguish	,	"put out A"},
 		{executePutIn				,	"put A in B"},
 		{executePutIn				,	"drop A in B"},
 		{executeDrop				,	"drop A"},
@@ -53,8 +55,13 @@ int parseAndExecute(char *input) {
 		{executeUnlock			,	"unlock A"},
 		{executeTurnOn			,	"turn on A"},
 		{executeTurnOff			,	"turn off A"},
+		{executeTurnOff			,	"shut A off"},
+		{executeTurnOff			,	"shut off A"},
+		{executeClose				,	"shut A"},
 		{executeTurnOn			,	"turn A on"},
 		{executeTurnOff			,	"turn A off"},
+		{executeLight				,	"light A"},
+		{executeExtinguish	,	"extinguish A"},
 		{executeNoMatch			,	"A"}
 	};
 	const COMMAND *cmd;

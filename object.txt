@@ -3,6 +3,7 @@
 #include "object.h"
 #include "move.h"
 #include "toggle.h"
+#include "onoff.h"
 #include "string_util.h"
 
 typedef struct object {
@@ -24,6 +25,8 @@ typedef struct object {
 	const char 		*(*unlock)(void);
 	const char 		*(*turnOn)(void);
 	const char 		*(*turnOff)(void);
+	const char 		*(*light)(void);
+	const char 		*(*extinguish)(void);
 	const char 		*(*customGet)(void);
 	const char 		*(*customAsk)(struct object*);
 	int lightSource;
@@ -215,6 +218,8 @@ extern OBJECT objs[];
 	tags				"lamp"
 	location		field
 	details			"The lamp is off.\n"
+	light				{	return lampOff->turnOn();	}
+	extinguish	isAlreadyExtinguished
 	turnOff			isAlreadyOff
 	turnOn			{ toggleReplace(lampOn, lampOff); return "You turn on the lamp.\n"; }
 	weight			5
@@ -224,6 +229,8 @@ extern OBJECT objs[];
 	tags				"lamp"
 	lightSource	1
 	details			"The lamp is on.\n"
+	light				isAlreadyLit
+	extinguish	{	return lampOn->turnOff();	}
 	turnOn			isAlreadyOn
 	turnOff			{ toggleReplace(lampOn, lampOff); return "You turn off the lamp.\n"; }
 	weight			5

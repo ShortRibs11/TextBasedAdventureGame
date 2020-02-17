@@ -27,6 +27,11 @@ const char *cannotTurnOff(void)    { return "It doesn't look like this can turn 
 const char *isAlreadyOff(void)     { return "This is already off.\n"; }
 const char *isAlreadyOn(void)      { return "This is already on.\n"; }
 
+const char *cannotLight(void)           { return "You try, but it fails to light.\n"; }
+const char *cannotExtinguish(void)      { return "That cannot be put out.\n"; }
+const char *isAlreadyLit(void)          { return "That is already lit.\n"; }
+const char *isAlreadyExtinguished(void) { return "That is already out.\n"; }
+
 void toggleReplace(OBJECT *old, OBJECT *new) {
   int oldLit = isLit(player->location);
   swapLocations(old, new);

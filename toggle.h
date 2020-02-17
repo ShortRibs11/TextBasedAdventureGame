@@ -16,4 +16,9 @@ extern const char *cannotTurnOff(void);
 extern const char *isAlreadyOn(void);
 extern const char *isAlreadyOff(void);
 
+extern const char *cannotLight(void);
+extern const char *cannotExtinguish(void);
+extern const char *isAlreadyLit(void);
+extern const char *isAlreadyExtinguished(void);
+
 extern void toggleReplace(OBJECT *old, OBJECT *new);

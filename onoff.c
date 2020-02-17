@@ -23,3 +23,23 @@ int executeTurnOff(void) {
   }
   return 1;
 }
+
+int executeLight(void) {
+  OBJECT *obj = reachableObject("what you want to light", params[0]);
+  if (obj->light == NULL) {
+    printf("%s", cannotLight());
+  } else {
+    printf("%s", (obj->light)());
+  }
+  return 1;
+}
+
+int executeExtinguish(void) {
+  OBJECT *obj = reachableObject("what you want to extinguish", params[0]);
+  if (obj->extinguish == NULL) {
+    printf("%s", cannotExtinguish());
+  } else {
+    printf("%s", (obj->extinguish)());
+  }
+  return 1;
+}

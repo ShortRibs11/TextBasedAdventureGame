@@ -3,6 +3,7 @@
 #include "object.h"
 #include "move.h"
 #include "toggle.h"
+#include "onoff.h"
 #include "string_util.h"
 static const char *tags0[] = { "field", NULL};
 static const char *tags1[] = { "cave", NULL};
@@ -36,8 +37,10 @@ static const char *tags18[] = { "box", "wooden box", NULL};
 static const char *unlock19(void)  { toggleReplace(lockedBox, closedBox); return "You unlock the box.\n"; }
 static const char *tags19[] = { "box", "wooden box", NULL};
 static const char *tags20[] = { "key", "tiny key", NULL};
+static const char *light21(void)  { return lampOff->turnOn(); }
 static const char *turnOn21(void)  { toggleReplace(lampOn, lampOff); return "You turn on the lamp.\n"; }
 static const char *tags21[] = { "lamp", NULL};
+static const char *extinguish22(void)  { return lampOn->turnOff(); }
 static const char *turnOff22(void)  { toggleReplace(lampOn, lampOff); return "You turn off the lamp.\n"; }
 static const char *tags22[] = { "lamp", NULL};
 
@@ -63,6 +66,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		 1
@@ -86,6 +91,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -109,6 +116,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		customGet2,
 		NULL,
 		0
@@ -132,6 +141,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -155,6 +166,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -178,6 +191,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -201,6 +216,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -224,6 +241,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -247,6 +266,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -270,6 +291,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -293,6 +316,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -316,6 +341,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -339,6 +366,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -362,6 +391,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -385,6 +416,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -408,6 +441,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -431,6 +466,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -454,6 +491,8 @@ OBJECT objs[] = {
 		 isAlreadyOpen,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -477,6 +516,8 @@ OBJECT objs[] = {
 		 isAlreadyUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -500,6 +541,8 @@ OBJECT objs[] = {
 		unlock19,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -523,6 +566,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		cannotTurnOn,
 		cannotTurnOff,
+		cannotLight,
+		cannotExtinguish,
 		NULL,
 		NULL,
 		0
@@ -546,6 +591,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		turnOn21,
 		 isAlreadyOff,
+		light21,
+		 isAlreadyExtinguished,
 		NULL,
 		NULL,
 		0
@@ -569,6 +616,8 @@ OBJECT objs[] = {
 		cannotBeUnlocked,
 		 isAlreadyOn,
 		turnOff22,
+		 isAlreadyLit,
+		extinguish22,
 		NULL,
 		NULL,
 		 1

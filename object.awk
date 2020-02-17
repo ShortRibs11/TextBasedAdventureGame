@@ -27,6 +27,8 @@ BEGIN {
    prop["unlock"] = "cannotBeUnlocked";
    prop["turnOn"] = "cannotTurnOn";
    prop["turnOff"] = "cannotTurnOff";
+   prop["light"] = "cannotLight";
+   prop["extinguish"] = "cannotExtinguish";
    prop["customGet"] = "NULL";
    prop["customAsk"] = "NULL";
    prop["lightSource"] = "0"
@@ -95,6 +97,8 @@ function outputRecord(separator)
          print "\t\t" prop["unlock"] ",";
          print "\t\t" prop["turnOn"] ",";
          print "\t\t" prop["turnOff"] ",";
+         print "\t\t" prop["light"] ",";
+         print "\t\t" prop["extinguish"] ",";
          print "\t\t" prop["customGet"] ",";
          print "\t\t" prop["customAsk"] ",";
          print "\t\t" prop["lightSource"];

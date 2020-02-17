@@ -18,6 +18,8 @@ typedef struct object {
 	const char 		*(*unlock)(void);
 	const char 		*(*turnOn)(void);
 	const char 		*(*turnOff)(void);
+	const char 		*(*light)(void);
+	const char 		*(*extinguish)(void);
 	const char 		*(*customGet)(void);
 	const char 		*(*customAsk)(struct object*);
 	int lightSource;
