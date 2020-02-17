@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <string.h>
 #include "object.h"
 #include "move.h"
 #include "toggle.h"
-#include "string.h"
+#include "string_util.h"
 static const char *tags0[] = { "field", NULL};
 static const char *tags1[] = { "cave", NULL};
-static const char *customGet2(void)  { moveObject(silver, player); return "OK, Boomer."; }
+static const char *customGet2(void)  { return moveObject(silver, player); }
 static const char *tags2[] = { "silver", "coin", "silver coin", NULL};
 static const char *tags3[] = { "gold", "coin", "gold coin", NULL};
 static const char *tags4[] = { "guard", "burly guard", NULL};

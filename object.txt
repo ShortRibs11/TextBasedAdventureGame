@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <string.h>
 #include "object.h"
 #include "move.h"
 #include "toggle.h"
-#include "string.h"
+#include "string_util.h"
 
 typedef struct object {
 	int				 (*condition)(void);
@@ -48,7 +49,7 @@ extern OBJECT objs[];
 	tags        "silver", "coin", "silver coin"
 	location    field
 	details			"The coin has an eagle on the obverse.\n"
-	customGet		{ moveObject(silver, player); return "OK, Boomer."; }
+	customGet		{ return moveObject(silver, player); }
 	weight 1
 
 - gold

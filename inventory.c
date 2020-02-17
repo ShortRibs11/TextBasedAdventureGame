@@ -27,7 +27,7 @@ int executeGet(void) {
 			if (obj->customGet != NULL) {
 				printf("%s", (*obj->customGet)());
 			} else {
-				moveObject(obj, player);
+				printf("%s", moveObject(obj, player));
 			}
 		}
 	}
@@ -35,7 +35,7 @@ int executeGet(void) {
 }
 
 int executeDrop(void) {
-	moveObject(getPossession(player, "drop", params[0]), player->location);
+	printf("%s", moveObject(getPossession(player, "drop", params[0]), player->location));
 	return 1;
 }
 
@@ -47,12 +47,12 @@ int executeAsk(void) {
 			return 1;
 		}
 	}
-	moveObject(obj, player);
+	printf("%s", moveObject(obj, player));
 	return 1;
 }
 
 int executeGive(void) {
-	moveObject(getPossession(player, "give", params[0]), actorHere());
+	printf("%s", moveObject(getPossession(player, "give", params[0]), actorHere()));
 	return 1;
 }
 

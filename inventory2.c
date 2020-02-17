@@ -11,7 +11,7 @@ int executeGetFrom(void) {
     if (from->health > 0) {
       printf("You should ask %s nicely.\n", from->description);
     } else {
-      moveObject(getPossession(from, "get", params[0]), player);
+      printf("%s", moveObject(getPossession(from, "get", params[0]), player));
     }
   }
   return 1;
@@ -25,7 +25,7 @@ int executePutIn(void) {
       if (to->health > 0) {
         printf("You should offer that nicely to %s.\n", to->description);
       } else {
-        moveObject(obj, to);
+        printf("%s", moveObject(obj, to));
       }
     }
   }
@@ -37,7 +37,7 @@ int executeAskFrom(void) {
   if (from != NULL) {
     if (from->health > 0) {
       if (getVisible("what you want to ask", params[0]) != NULL) {
-        moveObject(getPossession(from, "ask", params[0]), player);
+        printf("%s", moveObject(getPossession(from, "ask", params[0]), player));
       }
     } else {
       printf("There is no response from %s.\n", from->description);
@@ -52,7 +52,7 @@ int executeGiveTo(void) {
     OBJECT *to = reachableObject("who to give that to", params[1]);
     if (to != NULL) {
       if (to->health > 0) {
-        moveObject(obj, to);
+        printf("%s", moveObject(obj, to));
       } else {
         printf("No eagerness is shown by %s.\n", to->description);
       }
