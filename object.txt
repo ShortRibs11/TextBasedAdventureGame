@@ -4,6 +4,8 @@
 #include "move.h"
 #include "toggle.h"
 #include "onoff.h"
+#include "combat.h"
+#include "consumables.h"
 #include "string_util.h"
 
 typedef struct object {
@@ -28,7 +30,10 @@ typedef struct object {
 	const char 		*(*light)(void);
 	const char 		*(*extinguish)(void);
 	const char 		*(*customGet)(void);
+	const char 		*(*customFight)(void);
 	const char 		*(*customAsk)(struct object*);
+	const char 		*(*customEat)(void);
+	const char 		*(*customDrink)(void);
 	int lightSource;
 } OBJECT;
 
@@ -67,6 +72,8 @@ extern OBJECT objs[];
 	tags        "guard", "burly guard"
 	location    field
 	details			"The guard is a really big fellow.\n"
+	customFight	{	return "The guard merely raises an unamused eyebrow, and hardly notices your blows.\n";	}
+	customEat		{	return "The guard looks alarmed as you open your jaw as wide as it will go, but unfortunately, it is not nearly wide enough to swallow the guard.\n";	}
 	contents		"He has"
 	health			100
 	capacity		20

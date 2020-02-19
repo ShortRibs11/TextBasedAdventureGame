@@ -66,19 +66,4 @@ drop coin
 drop coin
 look backroom
 go backroom
-light lamp
-light lamp
-extinguish lamp
-turn on lamp
-put out lamp
-eat lamp
-eat guard
-eat backroom
-eat cave
-kill coin
-attack lamp
-fight guard
-fight cave
-hit coin
-eat coin
 quit

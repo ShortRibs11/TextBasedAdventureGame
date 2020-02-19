@@ -250,5 +250,50 @@ You don't see any backroom here.
 --> go backroom
 You don't see any backroom here.
 
+--> light lamp
+You turn on the lamp.
+
+--> light lamp
+That is already lit.
+
+--> extinguish lamp
+You turn off the lamp.
+
+--> turn on lamp
+You turn on the lamp.
+
+--> put out lamp
+You turn off the lamp.
+
+--> eat lamp
+You can't eat that.
+
+--> eat guard
+The guard looks alarmed as you open your jaw as wide as it will go, but unfortunately, it is not nearly wide enough to swallow the guard.
+
+--> eat backroom
+You don't see any backroom here.
+
+--> eat cave
+Too far away, move closer please.
+
+--> kill coin
+Your attempts to pick a fight with that fail.
+
+--> attack lamp
+Your attempts to pick a fight with that fail.
+
+--> fight guard
+The guard merely raises an unamused eyebrow, and hardly notices your blows.
+
+--> fight cave
+Too far away, move closer please.
+
+--> hit coin
+Your attempts to pick a fight with that fail.
+
+--> eat coin
+You can't eat that.
+
 --> quit
 Bye!

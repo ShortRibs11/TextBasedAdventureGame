@@ -1,6 +1,6 @@
 all: lilcave src.zip map.png
-C = object.c misc.c noun.c location.c move.c openclose.c onoff.c reachable.c toggle.c inventory.c inventory2.c parser.c match.c string_util.c main.c
-H = object.h misc.h noun.h location.h move.h openclose.h onoff.h reachable.h toggle.h inventory.h inventory2.h parser.h match.h string_util.h
+C = object.c misc.c noun.c location.c move.c openclose.c onoff.c reachable.c toggle.c inventory.c inventory2.c parser.c match.c combat.c consumables.c string_util.c main.c
+H = object.h misc.h noun.h location.h move.h openclose.h onoff.h reachable.h toggle.h inventory.h inventory2.h parser.h match.h combat.h consumables.h string_util.h
 
 success.txt: lilcave testscript.txt baseline.txt
 	./test.sh

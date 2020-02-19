@@ -7,6 +7,8 @@
 #include "inventory.h"
 #include "inventory2.h"
 #include "openclose.h"
+#include "combat.h"
+#include "consumables.h"
 #include "onoff.h"
 
 typedef struct {
@@ -62,6 +64,12 @@ int parseAndExecute(char *input) {
 		{executeTurnOff			,	"turn A off"},
 		{executeLight				,	"light A"},
 		{executeExtinguish	,	"extinguish A"},
+		{executeFight				,	"fight A"},
+		{executeFight				,	"attack A"},
+		{executeFight				,	"kill A"},
+		{executeFight				,	"hit A"},
+		{executeEat				,	"eat A"},
+		{executeDrink				,	"drink A"},
 		{executeNoMatch			,	"A"}
 	};
 	const COMMAND *cmd;

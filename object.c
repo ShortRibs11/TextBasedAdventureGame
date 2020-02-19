@@ -4,12 +4,16 @@
 #include "move.h"
 #include "toggle.h"
 #include "onoff.h"
+#include "combat.h"
+#include "consumables.h"
 #include "string_util.h"
 static const char *tags0[] = { "field", NULL};
 static const char *tags1[] = { "cave", NULL};
 static const char *customGet2(void)  { return moveObject(silver, player); }
 static const char *tags2[] = { "silver", "coin", "silver coin", NULL};
 static const char *tags3[] = { "gold", "coin", "gold coin", NULL};
+static const char *customFight4(void)  { return "The guard merely raises an unamused eyebrow, and hardly notices your blows.\n"; }
+static const char *customEat4(void)  { return "The guard looks alarmed as you open your jaw as wide as it will go, but unfortunately, it is not nearly wide enough to swallow the guard.\n"; }
 static const char *tags4[] = { "guard", "burly guard", NULL};
 static const char *tags5[] = { "yourself", NULL};
 static int condition6(void)  { return guard->health == 0 || silver->location == guard; }
@@ -70,6 +74,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		 1
 	},
 	{	/* 1 = cave */
@@ -93,6 +100,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -120,6 +130,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		customGet2,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 3 = gold */
@@ -143,6 +156,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -169,6 +185,9 @@ OBJECT objs[] = {
 		cannotLight,
 		cannotExtinguish,
 		NULL,
+		customFight4,
+		NULL,
+		customEat4,
 		NULL,
 		0
 	},
@@ -193,6 +212,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -220,6 +242,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 7 = intoCaveBlocked */
@@ -243,6 +268,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -270,6 +298,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 9 = wallField */
@@ -293,6 +324,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -320,6 +354,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 11 = backroom */
@@ -343,6 +380,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -370,6 +410,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 13 = openDoorToBackroom */
@@ -393,6 +436,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -420,6 +466,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 15 = openDoorToCave */
@@ -443,6 +492,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -470,6 +522,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 17 = openBox */
@@ -493,6 +548,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -520,6 +578,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 19 = lockedBox */
@@ -543,6 +604,9 @@ OBJECT objs[] = {
 		cannotTurnOff,
 		cannotLight,
 		cannotExtinguish,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		0
@@ -570,6 +634,9 @@ OBJECT objs[] = {
 		cannotExtinguish,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 21 = lampOff */
@@ -595,6 +662,9 @@ OBJECT objs[] = {
 		 isAlreadyExtinguished,
 		NULL,
 		NULL,
+		NULL,
+		NULL,
+		NULL,
 		0
 	},
 	{	/* 22 = lampOn */
@@ -618,6 +688,9 @@ OBJECT objs[] = {
 		turnOff22,
 		 isAlreadyLit,
 		extinguish22,
+		NULL,
+		NULL,
+		NULL,
 		NULL,
 		NULL,
 		 1

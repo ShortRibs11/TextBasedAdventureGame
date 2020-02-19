@@ -21,7 +21,10 @@ typedef struct object {
 	const char 		*(*light)(void);
 	const char 		*(*extinguish)(void);
 	const char 		*(*customGet)(void);
+	const char 		*(*customFight)(void);
 	const char 		*(*customAsk)(struct object*);
+	const char 		*(*customEat)(void);
+	const char 		*(*customDrink)(void);
 	int lightSource;
 } OBJECT;
 
