@@ -26,6 +26,7 @@ typedef struct object {
 	const char 		*(*customEat)(void);
 	const char 		*(*customDrink)(void);
 	int lightSource;
+	int integrated;
 } OBJECT;
 
 extern OBJECT objs[];

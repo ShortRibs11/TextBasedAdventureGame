@@ -77,7 +77,8 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 1
+		 1,
+		0
 	},
 	{	/* 1 = cave */
 		alwaysTrue,
@@ -105,6 +106,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 2 = silver */
@@ -133,7 +135,8 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		0
+		0,
+		 1
 	},
 	{	/* 3 = gold */
 		alwaysTrue,
@@ -161,6 +164,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 4 = guard */
@@ -189,6 +193,7 @@ OBJECT objs[] = {
 		NULL,
 		customEat4,
 		NULL,
+		0,
 		0
 	},
 	{	/* 5 = player */
@@ -217,6 +222,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 6 = intoCave */
@@ -245,6 +251,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 7 = intoCaveBlocked */
@@ -273,6 +280,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 8 = exitCave */
@@ -301,6 +309,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 9 = wallField */
@@ -329,6 +338,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 10 = wallCave */
@@ -357,6 +367,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 11 = backroom */
@@ -385,6 +396,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 12 = wallBackroom */
@@ -413,6 +425,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 13 = openDoorToBackroom */
@@ -441,6 +454,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 14 = closedDoorToBackroom */
@@ -469,6 +483,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 15 = openDoorToCave */
@@ -497,6 +512,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 16 = closedDoorToCave */
@@ -525,6 +541,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 17 = openBox */
@@ -553,6 +570,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 18 = closedBox */
@@ -581,6 +599,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 19 = lockedBox */
@@ -609,6 +628,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 20 = keyForBox */
@@ -637,6 +657,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 21 = lampOff */
@@ -665,6 +686,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
+		0,
 		0
 	},
 	{	/* 22 = lampOn */
@@ -693,6 +715,7 @@ OBJECT objs[] = {
 		NULL,
 		NULL,
 		NULL,
-		 1
+		 1,
+		0
 	}
 };

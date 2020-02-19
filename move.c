@@ -26,28 +26,9 @@ const char* moveObject(OBJECT *obj, OBJECT *to) {
 		reply = ("That would become too heavy.\n");
 	} else {
 		if (to == player->location) {
-//			printf("You drop %s.\n", obj->description);
-/*			strcpy(reply, "You drop \0");
-//			strcpy(buffer, obj->description);
-//			snprintf(reply, BUFFER_SIZE, "You drop %s.\n", buffer);
-			int i, j;
-//			char *loc = obj->description;
-			for (i = strlen(reply), j=0;
-						(i < BUFFER_SIZE) && (obj->description[j] != '\0');
-								i++, j++) {
-				printf("Adding %c", obj->description[j]);
-				reply[i] = obj->description[j];
-			}
-			reply[i] = '\0';*/
 			reply = combineStrings("You drop ", combineStrings(obj->description, ".\n",
 										BUFFER_SIZE), BUFFER_SIZE);
-//			strcat(reply, obj->description);
-//			strcat(reply, ".\n");
 		} else if (to != player) {
-/*			printf(to->health > 0		? "You give %s to %s.\n"
-																: "You put %s in %s.\n",
-					obj->description, to->description);
-					*/
 			reply = (to->health > 0
 										?		combineStrings("You give ",
 												combineStrings(obj->description,
@@ -63,9 +44,11 @@ const char* moveObject(OBJECT *obj, OBJECT *to) {
 													BUFFER_SIZE),BUFFER_SIZE)
 						);
 		} else if (obj->location == player->location) {
+			obj->integrated = 0;
 			reply = combineStrings("You pick up ",combineStrings(obj->description, ".\n",
 															BUFFER_SIZE),BUFFER_SIZE);
 		} else {
+			obj->integrated = 0;
 			reply = combineStrings("You get ", combineStrings(obj->description,
 							combineStrings(" from ",
 							combineStrings(obj->location->description, ".\n",

@@ -67,7 +67,7 @@ int listObjectsAtLocation(OBJECT *location) {
 	OBJECT *obj;
 	forEachObject(obj) {
 		if (obj != player && obj->location == location &&
-				getDistance(player, obj) < distNotHere) {
+				getDistance(player, obj) < distNotHere && obj->integrated == 0) {
 			if (count++ == 0) {
 				printf("%s\n", location->contents);
 			}

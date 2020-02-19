@@ -35,19 +35,18 @@ typedef struct object {
 	const char 		*(*customEat)(void);
 	const char 		*(*customDrink)(void);
 	int lightSource;
-	int integratedText;
 } OBJECT;
 
 extern OBJECT objs[];
 
-- field
-	description "an open field"
-	tags        "field"
+- deku_lobby
+	description "Deku tree lobby"
+	tags        "deku tree", "deku", "tree", "lobby", "main hall", "main", "entrance", "inside"
 	lightSource	1
-	details			"The field is a nice and quiet place under a clear blue sky.\n"
+	details			"The inside of the Deku tree.\n"
 	capacity		9999
 
-- cave
+- deku_level2
 	description "a little cave"
 	tags        "cave"
 	details			"The cave is just a cold, damp, rocky chamber.\n"
@@ -59,8 +58,7 @@ extern OBJECT objs[];
 	location    field
 	details			"The coin has an eagle on the obverse.\n"
 	customGet		{ return moveObject(silver, player); }
-	weight			1
-	integrated	1
+	weight 1
 
 - gold
 	description "a gold coin"
