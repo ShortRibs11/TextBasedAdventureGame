@@ -34,8 +34,9 @@ typedef struct object {
 	const char 		*(*customAsk)(struct object*);
 	const char 		*(*customEat)(void);
 	const char 		*(*customDrink)(void);
-	int lightSource;
-	int integratedText;
+	const char		*(*update)(void);
+	int 					lightSource;
+	const char 		*integrated;
 } OBJECT;
 
 extern OBJECT objs[];
@@ -53,6 +54,12 @@ extern OBJECT objs[];
 	details			"The cave is just a cold, damp, rocky chamber.\n"
 	capacity		9999
 
+- caveNo
+	description "a little cave"
+	tags        "cave"
+	details			"The cave is just a cold, damp, rocky chamber.\n"
+	capacity		9999
+
 - silver
 	description "a silver coin"
 	tags        "silver", "coin", "silver coin"
@@ -60,7 +67,7 @@ extern OBJECT objs[];
 	details			"The coin has an eagle on the obverse.\n"
 	customGet		{ return moveObject(silver, player); }
 	weight			1
-	integrated	1
+	integrated	"A silver coin glistens on the ground among the leaves."
 
 - gold
 	description "a gold coin"
@@ -76,6 +83,7 @@ extern OBJECT objs[];
 	details			"The guard is a really big fellow.\n"
 	customFight	{	return "The guard merely raises an unamused eyebrow, and hardly notices your blows.\n";	}
 	customEat		{	return "The guard looks alarmed as you open your jaw as wide as it will go, but unfortunately, it is not nearly wide enough to swallow the guard.\n";	}
+	update			{ if (guard->location == field) { guard->location = cave; return "The guard paces into the cave.\n"; } else { guard->location = field; return "The guard paces into the field.\n"; }	}
 	contents		"He has"
 	health			100
 	capacity		20
@@ -92,6 +100,7 @@ extern OBJECT objs[];
 - intoCave
 	condition		{ return guard->health == 0 || silver->location == guard; }
 	description "a cave entrance to the east"
+	integrated	"\0"
 	tags        "east", "entrance"
 	location    field
 	destination	cave
@@ -102,6 +111,7 @@ extern OBJECT objs[];
 - intoCaveBlocked
 	condition		{ return guard->health > 0 && silver->location != guard; }
 	description "a cave entrance to the east"
+	integrated	"\0"
 	tags        "east", "entrance"
 	location    field
 	prospect		cave
@@ -111,6 +121,7 @@ extern OBJECT objs[];
 
 - exitCave
 	description "an exit to the west"
+	integrated	"There is sunlight coming from the west."
 	tags        "west", "exit"
 	location    cave
 	destination field
@@ -120,6 +131,7 @@ extern OBJECT objs[];
 
 - wallField
 	description "dense forest all around"
+	integrated	"There is a cave entrance in the rock wall to the east, and dense forest on all other sides."
 	tags        "west", "north", "south", "forest"
 	location    field
 	details			"The field is surrounded by trees and undergrowth.\n"
@@ -127,6 +139,7 @@ extern OBJECT objs[];
 
 - wallCave
 	description "solid rock all around"
+	integrated	"You are surrounded on all sides by solid rock."
 	tags        "east", "north", "rock"
 	location    cave
 	details			"Carved in stone is a secret password abccd'.\n"
@@ -140,6 +153,7 @@ extern OBJECT objs[];
 
 - wallBackroom
 	description "solid rock all around"
+	integrated	"This appears to be only one exit."
 	tags				"east", "west", "south", "rock"
 	location		backroom
 	details			"Trendy wallpaper covers the rock walls.\n"
@@ -147,6 +161,7 @@ extern OBJECT objs[];
 
 - openDoorToBackroom
 	description	"an open door to the south"
+	integrated	"There is an open door leading into some sort of backroom to the south."
 	tags				"south", "door", "doorway"
 	destination	backroom
 	details			"The door is open.\n"
@@ -155,7 +170,8 @@ extern OBJECT objs[];
 	close				{ toggleReplace(openDoorToBackroom, closedDoorToBackroom); toggleReplace(openDoorToCave, closedDoorToCave); return "You close the door.\n"; }
 
 - closedDoorToBackroom
-	description	"an closed door to the south"
+	description	"a closed door to the south"
+	integrated	"There is a closed door to the south."
 	tags				"south", "door", "doorway"
 	location		cave
 	prospect		backroom
@@ -166,6 +182,7 @@ extern OBJECT objs[];
 
 - openDoorToCave
 	description	"an open door to the north"
+	integrated	"There is an open door leading into a cave to your north."
 	tags				"north", "door", "doorway"
 	destination	cave
 	details			"The door is open.\n"
@@ -175,6 +192,7 @@ extern OBJECT objs[];
 
 - closedDoorToCave
 	description	"an closed door to the north"
+	integrated	"There is a closed door in the north wall."
 	tags				"north", "door", "doorway"
 	location		backroom
 	prospect		cave

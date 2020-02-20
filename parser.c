@@ -3,6 +3,7 @@
 #include "object.h"
 #include "misc.h"
 #include "match.h"
+#include "world.h"
 #include "location.h"
 #include "inventory.h"
 #include "inventory2.h"
@@ -75,9 +76,15 @@ int parseAndExecute(char *input) {
 	const COMMAND *cmd;
 	for (cmd = commands; !matchCommand(input, cmd->pattern); cmd++);
 	int exitCode = (*cmd->function)();
-	if (isLookAroundNeeded()) {
-		printf("\n");
-		executeLookAround();
+	if (exitCode) {
+		if (isLookAroundNeeded()) {
+			printf("\n");
+			executeLookAround();
+		}
+		if (isWorldUpdateNeeded()) {
+			printf("\n");
+			worldUpdate();
+		}
 	}
 	return exitCode;
 }

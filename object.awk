@@ -34,8 +34,9 @@ BEGIN {
    prop["customAsk"] = "NULL";
    prop["customEat"] = "NULL";
    prop["customDrink"] = "NULL";
+   prop["update"] = "NULL";
    prop["lightSource"] = "0"
-   prop["integrated"] = "0"
+   prop["integrated"] = "NULL"
 }
 obj && /^[ \t]+[a-z]/ {
    name = $1;
@@ -108,6 +109,7 @@ function outputRecord(separator)
          print "\t\t" prop["customAsk"] ",";
          print "\t\t" prop["customEat"] ",";
          print "\t\t" prop["customDrink"] ",";
+         print "\t\t" prop["update"] ",";
          print "\t\t" prop["lightSource"] ",";
          print "\t\t" prop["integrated"];
          print "\t}" separator;

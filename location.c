@@ -8,7 +8,17 @@ static int needLookAround = 0;
 
 int executeLookAround(void) {
 	if (isLit(player->location)) {
-		printf("You are in %s.\n", player->location->description);
+		printf("You are in %s.", player->location->description);
+		OBJECT *obj;
+		forEachObject(obj) {
+			if (obj != player && obj->location == player->location &&
+					getDistance(player, obj) < distNotHere && obj->integrated != NULL) {
+				if (obj->integrated[0] != '\0') {
+					printf(" %s", obj->integrated);
+				}
+			}
+		}
+		printf("\n");
 	} else {
 		printf("It is very dark in here.\n");
 	}

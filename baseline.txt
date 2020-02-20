@@ -1,10 +1,7 @@
 Welcome to Little Cave Adventure.
-You are in an open field.
+You are in an open field. A silver coin glistens on the ground among the leaves. There is a cave entrance in the rock wall to the east, and dense forest on all other sides.
 You see
-a silver coin
 a burly guard
-a cave entrance to the east
-dense forest all around
 a lamp
 
 --> mumble
@@ -22,11 +19,14 @@ You should not be doing that to yourself.
 --> get silver coin
 You pick up a silver coin.
 
+The guard paces into the cave.
+
+
 --> get coin
 You already have a silver coin.
 
 --> get guard
-That would become too heavy.
+You don't see any guard here.
 
 --> get cave
 Too far away, move closer please.
@@ -43,6 +43,9 @@ The coin has an eagle on the obverse.
 
 --> get lamp
 You pick up a lamp.
+
+The guard paces into the field.
+
 
 --> inventory
 You have
@@ -61,23 +64,26 @@ Too far away, move closer please.
 --> give coin
 You give a silver coin to a burly guard.
 
+The guard paces into the cave.
+
+
 --> give lamp to guard
-You give a lamp to a burly guard.
+You don't see any guard here.
 
 --> look lamp
-Hard to see, try to get it first.
+The lamp is off.
 
 --> get lamp from guard
-You should ask a burly guard nicely.
+You don't see any guard here.
 
 --> ask lamp from guard
-You get a lamp from a burly guard.
+You don't see any guard here.
 
 --> open yourself
 You should not be doing that to yourself.
 
 --> open coin
-You would have to get it from a burly guard first.
+You don't see any coin here.
 
 --> open cave
 Too far away, move closer please.
@@ -86,8 +92,6 @@ Too far away, move closer please.
 You walk into the cave.
 
 It is very dark in here.
-You see
-an exit to the west
 
 --> go east
 It's too dark.
@@ -95,23 +99,22 @@ It's too dark.
 --> turn lamp on
 You turn on the lamp.
 
-You are in a little cave.
+You are in a little cave. There is sunlight coming from the west. You are surrounded on all sides by solid rock. There is a closed door to the south.
 You see
-an exit to the west
-solid rock all around
-an closed door to the south
+a burly guard
 a tiny key
 
 --> look around
-You are in a little cave.
+You are in a little cave. There is sunlight coming from the west. You are surrounded on all sides by solid rock. There is a closed door to the south.
 You see
-an exit to the west
-solid rock all around
-an closed door to the south
+a burly guard
 a tiny key
 
 --> get key from cave
 You pick up a tiny key.
+
+The guard paces into the field.
+
 
 --> ask coin
 I don't understand who you want to ask.
@@ -128,17 +131,15 @@ You open the door.
 --> go south
 You walk through the door into a backroom.
 
-You are in a backroom.
+You are in a backroom. This appears to be only one exit. There is an open door leading into a cave to your north.
 You see
-solid rock all around
-an open door to the north
 a wooden box
 
 --> open box
 That is still closed.
 
 --> put key in box
-The key seems to fit the lock alright.
+It doesn't seem to fit in.
 
 --> unlock box
 You unlock the box.
@@ -157,8 +158,10 @@ a gold coin
 --> get coin from box
 You get a gold coin from a wooden box.
 
+
 --> put coin in box
 You put a gold coin in a wooden box.
+
 
 --> lock box
 That is still open.
@@ -175,6 +178,7 @@ That is already locked.
 --> drop key
 You drop a tiny key.
 
+
 --> lock box
 That is already locked.
 
@@ -184,26 +188,22 @@ You unlock the box.
 --> get key
 You pick up a tiny key.
 
+
 --> go north
 You walk through the door into a backroom.
 
-You are in a little cave.
-You see
-an exit to the west
-solid rock all around
-an open door to the south
+You are in a little cave. There is sunlight coming from the west. You are surrounded on all sides by solid rock. There is an open door leading into some sort of backroom to the south.
 
 --> drop key
 You drop a tiny key.
 
+The guard paces into the cave.
+
+
 --> go west
 You walk out of the cave.
 
-You are in an open field.
-You see
-a burly guard
-a cave entrance to the east
-dense forest all around
+You are in an open field. There is a cave entrance in the rock wall to the east, and dense forest on all other sides.
 
 --> turn lamp on
 This is already on.
@@ -217,8 +217,14 @@ This is already off.
 --> drop lamp
 You drop a lamp.
 
+The guard paces into the field.
+
+
 --> ask coin
 You get a silver coin from a burly guard.
+
+The guard paces into the cave.
+
 
 --> turn coin on
 It doesn't look like this can turn on.
@@ -240,6 +246,9 @@ That cannot be unlocked.
 
 --> drop coin
 You drop a silver coin.
+
+The guard paces into the field.
+
 
 --> drop coin
 You are not holding any coin.
