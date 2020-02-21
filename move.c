@@ -7,8 +7,6 @@
 #include "world.h"
 #include "misc.h"
 
-#define BUFFER_SIZE 150
-
 const char* moveObject(OBJECT *obj, OBJECT *to) {
 //	char reply[BUFFER_SIZE] = {0x0};
 	char *reply = NULL;

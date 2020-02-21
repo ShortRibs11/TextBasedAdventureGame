@@ -1,0 +1,33 @@
+get lamp
+get coin
+give coin to guard
+go east
+light lamp
+look south
+south
+go south
+go east
+go south
+look
+look at passage
+look at cave
+drop lamp
+get lamp
+drop lamp
+get lamp
+go north
+go east
+go west
+go south
+go east
+go west
+drop lamp
+get lamp
+drop lamp
+get lamp
+drop lamp
+look
+drop coin
+inventory
+inventory
+go south

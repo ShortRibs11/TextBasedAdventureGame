@@ -7,6 +7,7 @@
 #include "combat.h"
 #include "consumables.h"
 #include "string_util.h"
+#include "thief.h"
 
 typedef struct object {
 	int				 (*condition)(void);
@@ -51,13 +52,122 @@ extern OBJECT objs[];
 - cave
 	description "a little cave"
 	tags        "cave"
-	details			"The cave is just a cold, damp, rocky chamber.\n"
+	details			"The cave is just a cold, damp, rocky chamber. There is a draft coming from somewhere.\n"
 	capacity		9999
 
-- caveNo
+- intoCaveMaze
+	description "a dark crack in the south wall"
+	integrated	"\0"
+	tags        "south", "crack"
+	location    cave
+	destination	caveMaze1
+	details			"The crack looks large enough to crawl into.\n"
+	textGo			"You crawl into a narrow passage.\n"
+	open				isAlreadyOpen
+
+- exitCaveMaze
+	description "a crack in the north wall"
+	tags        "north", "crack"
+	location    caveMaze1
+	destination	cave
+	details			"The crack looks large enough to crawl into.\n"
+	textGo			"You crawl out into the cave.\n"
+	open				isAlreadyOpen
+
+- fromCaveMaze1to2
+	description "a passage"
+	integrated	"\0"
+	tags        "east", "passage"
+	location    caveMaze1
+	destination	caveMaze2
+	details			"The passage leads east.\n"
+	textGo			"You crawl east.\n"
+
+- fromCaveMaze2to3
+	description "a passage"
+	integrated	"\0"
+	tags        "south", "passage"
+	location    caveMaze2
+	destination	caveMaze3
+	details			"The passage leads south.\n"
+	textGo			"You crawl south.\n"
+
+- fromCaveMaze3to4
+	description "a passage"
+	integrated	"\0"
+	tags        "west", "passage"
+	location    caveMaze3
+	destination	caveMaze4
+	details			"The passage leads west.\n"
+	textGo			"You crawl west.\n"
+
+- fromCaveMaze4to1
+	description "a passage"
+	integrated	"\0"
+	tags        "north", "passage"
+	location    caveMaze4
+	destination	caveMaze1
+	details			"The passage leads north.\n"
+	textGo			"You crawl north.\n"
+
+- fromCaveMaze1to4
+	description "a passage"
+	integrated	"\0"
+	tags        "south", "passage"
+	location    caveMaze1
+	destination	caveMaze4
+	details			"The passage leads south.\n"
+	textGo			"You crawl south.\n"
+
+- fromCaveMaze4to3
+	description "a passage"
+	integrated	"\0"
+	tags        "east", "passage"
+	location    caveMaze4
+	destination	caveMaze3
+	details			"The passage leads east.\n"
+	textGo			"You crawl east.\n"
+
+- fromCaveMaze3to2
+	description "a passage"
+	integrated	"\0"
+	tags        "north", "passage"
+	location    caveMaze3
+	destination	caveMaze2
+	details			"The passage leads north.\n"
+	textGo			"You crawl north.\n"
+
+- fromCaveMaze2to1
+	description "a passage"
+	integrated	"\0"
+	tags        "west", "passage"
+	location    caveMaze2
+	destination	caveMaze1
+	details			"The passage leads west.\n"
+	textGo			"You crawl west.\n"
+
+- caveMaze1
 	description "a little cave"
-	tags        "cave"
-	details			"The cave is just a cold, damp, rocky chamber.\n"
+	tags        "cave", "passage"
+	details			"The cave is just a narrow, damp, passage, with barely any room to move.\nThe passage forks here, leading north, south, and east.\n"
+	capacity		9999
+
+- caveMaze2
+	description "a little cave"
+	tags        "cave", "passage"
+	details			"The cave is just a narrow, damp, passage, with barely any room to move.\nThe passage bends here, traveling south and west.\n"
+	capacity		9999
+
+- caveMaze3
+	description "a little cave"
+	tags        "cave", "passage"
+	details			"The cave is just a narrow, damp, passage, with barely any room to move.\nThe passage bends here, traveling north and west.\n"
+	capacity		9999
+
+- caveMaze4
+	description "a little cave"
+	tags        "cave", "passage"
+	details			"The cave is just a narrow, damp, passage, with barely any room to move.\nThe passage bends here, traveling north and east.\n"
 	capacity		9999
 
 - silver
@@ -142,7 +252,7 @@ extern OBJECT objs[];
 	integrated	"You are surrounded on all sides by solid rock."
 	tags        "east", "north", "rock"
 	location    cave
-	details			"Carved in stone is a secret password abccd'.\n"
+	details			"There is a crack in the southern wall.\n"
 	textGo			"Solid rock is blocking the way.\n"
 
 - backroom
@@ -173,7 +283,7 @@ extern OBJECT objs[];
 	description	"a closed door to the south"
 	integrated	"There is a closed door to the south."
 	tags				"south", "door", "doorway"
-	location		cave
+	location		caveMaze3
 	prospect		backroom
 	details			"The door is closed.\n"
 	textGo			"The door is closed.\n"
@@ -184,7 +294,7 @@ extern OBJECT objs[];
 	description	"an open door to the north"
 	integrated	"There is an open door leading into a cave to your north."
 	tags				"north", "door", "doorway"
-	destination	cave
+	destination	caveMaze3
 	details			"The door is open.\n"
 	textGo			"You walk through the door into a backroom.\n"
 	open				isAlreadyOpen
@@ -195,7 +305,7 @@ extern OBJECT objs[];
 	integrated	"There is a closed door in the north wall."
 	tags				"north", "door", "doorway"
 	location		backroom
-	prospect		cave
+	prospect		caveMaze3
 	details			"The door is closed.\n"
 	textGo			"The door is closed.\n"
 	open				{ return (*closedDoorToBackroom->open)(); }
@@ -261,3 +371,10 @@ extern OBJECT objs[];
 	turnOn			isAlreadyOn
 	turnOff			{ toggleReplace(lampOn, lampOff); return "You turn off the lamp.\n"; }
 	weight			5
+
+- thief
+	description	"a sneaky thief"
+	tags				"thief", "robber", "scoundrel"
+	location		caveMaze1
+	details			"The thief is prowling the corridors looking for something to steal."
+	update			thiefUpdate

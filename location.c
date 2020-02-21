@@ -2,6 +2,7 @@
 #include "object.h"
 #include "misc.h"
 #include "match.h"
+#include "world.h"
 #include "noun.h"
 
 static int needLookAround = 0;
@@ -53,6 +54,8 @@ static void movePlayer(OBJECT *passage) {
 	if (passage->destination != NULL) {
 		player->location = passage->destination;
 		printf("\n");
+		// Update the world
+		triggerWorldUpdate();
 		executeLookAround();
 	}
 }
