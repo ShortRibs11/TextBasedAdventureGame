@@ -26,3 +26,9 @@ int isWorldUpdateNeeded(void) {
 void triggerWorldUpdate(void) {
 	needWorldUpdate = 1;
 }
+
+int executeWait(void) {
+  triggerWorldUpdate();
+  printf("You wait...\n");
+  return 1;
+}

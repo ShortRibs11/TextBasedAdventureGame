@@ -31,3 +31,7 @@ drop coin
 inventory
 inventory
 go south
+wait
+wait
+wait
+get lamp

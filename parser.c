@@ -34,6 +34,7 @@ static int executeNoMatch(void) {
 int parseAndExecute(char *input) {
 	static const COMMAND commands[] = {
 		{executeQuit				,	"quit"},
+		{executeWait				,	"wait"},
 		{executeLookAround	,	"look"},
 		{executeLookAround	,	"look around"},
 		{executeLook				,	"look at A"},
