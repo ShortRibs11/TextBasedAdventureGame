@@ -2,12 +2,14 @@
 #include "object.h"
 #include "move.h"
 #include "string_util.h"
+#include "misc.h"
 #include "thief.h"
+
+static int stole = 0;
 
 const char *thiefUpdate() {
 	OBJECT *tLoc = thief->location;
   char * reply = "A sneaky thief crawls through the passage heading ";
-	int stole = 0;
 
   if (tLoc == lampOn->location) {
     lampOn->location = thief;
@@ -16,15 +18,17 @@ const char *thiefUpdate() {
       lampOn->location = thief;
 			stole = 1;
       reply = "The thief swipes your lamp! He runs ";
-    }
-		OBJECT * obj;
-		forEachObject(obj) {
-			if (obj->location == player) {
-	      obj->location = thief;
-				stole = 1;
-	      reply = combineStrings("The thief swipes ",
-								combineStrings(obj->description, " from you! He runs ",
-																BUFFER_SIZE),BUFFER_SIZE);
+    } else {
+			OBJECT * obj;
+			forEachObject(obj) {
+				if (obj->location == player) {
+		      obj->location = thief;
+					stole = 1;
+		      reply = combineStrings("The thief swipes ",
+									combineStrings(obj->description, " from you! He runs ",
+																	BUFFER_SIZE),BUFFER_SIZE);
+					break;
+				}
 			}
 		}
   }
@@ -34,17 +38,25 @@ const char *thiefUpdate() {
 			if (obj->location == tLoc) {
 				// Try to steal the object
 				printf("Checking %s...\n", obj->description);
-				moveObject(obj, thief);
+//				const char * success = moveObject(obj, thief);
 				// If the object was stolen successfully
-				if (obj->location == thief) {
+//				if (obj->location == thief) {
+				if ((obj->health == 0) &&
+						(obj->weight < weightOfContents(thief) + thief->capacity)) {
 					printf("Stealing %s.\n", obj->description);
+					obj->location = thief;
 					reply = combineStrings("The thief picks up a ",
 									combineStrings(obj->description, " and scurries ",
 																	BUFFER_SIZE),BUFFER_SIZE);
+					stole = 1;
+					break;
 				}
 			}
 		}
 	}
+
+	stole = 0;
+
   if (tLoc == caveMaze1) {
     thief->location = caveMaze2;
 		reply = combineStrings(reply, "east", BUFFER_SIZE);

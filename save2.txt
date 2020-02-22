@@ -1,0 +1,25 @@
+get lamp
+get coin
+give coin to guard
+go east
+light lamp
+get key
+ask coin from guard
+go south
+inventory
+wait
+wait
+inventory
+drop coin
+drop key
+inventory
+look
+wait
+look
+wait
+look
+wait
+wait
+wait
+look
+wait
