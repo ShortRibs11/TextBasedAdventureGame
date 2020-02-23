@@ -31,12 +31,18 @@ OBJECT *getVisible(const char *intention, const char *noun)
 	OBJECT *obj = getObject(noun, player, distOverThere);
 	if (obj == NULL)
 	{
-		if (getObject(noun, player, distNotHere) == NULL) {
-			printf("I don't understand %s.\n", intention);
-		} else if (isLit(player->location)) {
-			printf("You don't see any %s here.\n", noun);
+		if (strcmp(noun, "north") && strcmp(noun, "east") &&
+				strcmp(noun, "south") && strcmp(noun, "west") &&
+				strcmp(noun, "up") 		&& strcmp(noun, "down")) {
+			if (getObject(noun, player, distNotHere) == NULL) {
+				printf("I don't understand %s.\n", intention);
+			} else if (isLit(player->location)) {
+				printf("You don't see any %s here.\n", noun);
+			} else {
+				printf("It's too dark.\n");
+			}
 		} else {
-			printf("It's too dark.\n");
+			printf("You can't go %s from here.\n", noun);
 		}
 	} else if (obj == &ambiguousNoun) {
 		printf("Please be specific about which %s you mean.\n", noun);

@@ -7,7 +7,6 @@
 #include "combat.h"
 #include "consumables.h"
 #include "string_util.h"
-#include "thief.h"
 
 typedef struct object {
 	int				 (*condition)(void);
@@ -35,6 +34,8 @@ typedef struct object {
 	const char 		*(*customAsk)(struct object*);
 	const char 		*(*customEat)(void);
 	const char 		*(*customDrink)(void);
+	const char 		*(*customClimb)(void);
+	const char 		*(*customJumpOff)(void);
 	const char		*(*update)(void);
 	int 					lightSource;
 	const char 		*integrated;
@@ -42,339 +43,121 @@ typedef struct object {
 
 extern OBJECT objs[];
 
-- field
-	description "an open field"
-	tags        "field"
-	lightSource	1
-	details			"The field is a nice and quiet place under a clear blue sky.\n"
-	capacity		9999
-
-- cave
-	description "a little cave"
-	tags        "cave"
-	details			"The cave is just a cold, damp, rocky chamber. There is a draft coming from somewhere.\n"
-	capacity		9999
-
-- intoCaveMaze
-	description "a dark crack in the south wall"
-	integrated	"\0"
-	tags        "south", "crack"
-	location    cave
-	destination	caveMaze1
-	details			"The crack looks large enough to crawl into.\n"
-	textGo			"You crawl into a narrow passage.\n"
-	open				isAlreadyOpen
-
-- exitCaveMaze
-	description "a crack in the north wall"
-	tags        "north", "crack"
-	location    caveMaze1
-	destination	cave
-	details			"The crack looks large enough to crawl into.\n"
-	textGo			"You crawl out into the cave.\n"
-	open				isAlreadyOpen
-
-- fromCaveMaze1to2
-	description "a passage"
-	integrated	"\0"
-	tags        "east", "passage"
-	location    caveMaze1
-	destination	caveMaze2
-	details			"The passage leads east.\n"
-	textGo			"You crawl east.\n"
-
-- fromCaveMaze2to3
-	description "a passage"
-	integrated	"\0"
-	tags        "south", "passage"
-	location    caveMaze2
-	destination	caveMaze3
-	details			"The passage leads south.\n"
-	textGo			"You crawl south.\n"
-
-- fromCaveMaze3to4
-	description "a passage"
-	integrated	"\0"
-	tags        "west", "passage"
-	location    caveMaze3
-	destination	caveMaze4
-	details			"The passage leads west.\n"
-	textGo			"You crawl west.\n"
-
-- fromCaveMaze4to1
-	description "a passage"
-	integrated	"\0"
-	tags        "north", "passage"
-	location    caveMaze4
-	destination	caveMaze1
-	details			"The passage leads north.\n"
-	textGo			"You crawl north.\n"
-
-- fromCaveMaze1to4
-	description "a passage"
-	integrated	"\0"
-	tags        "south", "passage"
-	location    caveMaze1
-	destination	caveMaze4
-	details			"The passage leads south.\n"
-	textGo			"You crawl south.\n"
-
-- fromCaveMaze4to3
-	description "a passage"
-	integrated	"\0"
-	tags        "east", "passage"
-	location    caveMaze4
-	destination	caveMaze3
-	details			"The passage leads east.\n"
-	textGo			"You crawl east.\n"
-
-- fromCaveMaze3to2
-	description "a passage"
-	integrated	"\0"
-	tags        "north", "passage"
-	location    caveMaze3
-	destination	caveMaze2
-	details			"The passage leads north.\n"
-	textGo			"You crawl north.\n"
-
-- fromCaveMaze2to1
-	description "a passage"
-	integrated	"\0"
-	tags        "west", "passage"
-	location    caveMaze2
-	destination	caveMaze1
-	details			"The passage leads west.\n"
-	textGo			"You crawl west.\n"
-
-- caveMaze1
-	description "a little cave"
-	tags        "cave", "passage"
-	details			"The cave is just a narrow, damp, passage, with barely any room to move.\nThe passage forks here, leading north, south, and east.\n"
-	capacity		9999
-
-- caveMaze2
-	description "a little cave"
-	tags        "cave", "passage"
-	details			"The cave is just a narrow, damp, passage, with barely any room to move.\nThe passage bends here, traveling south and west.\n"
-	capacity		9999
-
-- caveMaze3
-	description "a little cave"
-	tags        "cave", "passage"
-	details			"The cave is just a narrow, damp, passage, with barely any room to move.\nThe passage bends here, traveling north and west.\n"
-	capacity		9999
-
-- caveMaze4
-	description "a little cave"
-	tags        "cave", "passage"
-	details			"The cave is just a narrow, damp, passage, with barely any room to move.\nThe passage bends here, traveling north and east.\n"
-	capacity		9999
-
-- silver
-	description "a silver coin"
-	tags        "silver", "coin", "silver coin"
-	location    field
-	details			"The coin has an eagle on the obverse.\n"
-	customGet		{ return moveObject(silver, player); }
-	weight			1
-	integrated	"A silver coin glistens on the ground among the leaves."
-
-- gold
-	description "a gold coin"
-	tags        "gold", "coin", "gold coin"
-	location    openBox
-	details			"The shiny coin seems to be a rare and priceless artifact.\n"
-	weight			1
-
-- guard
-	description "a burly guard"
-	tags        "guard", "burly guard"
-	location    field
-	details			"The guard is a really big fellow.\n"
-	customFight	{	return "The guard merely raises an unamused eyebrow, and hardly notices your blows.\n";	}
-	customEat		{	return "The guard looks alarmed as you open your jaw as wide as it will go, but unfortunately, it is not nearly wide enough to swallow the guard.\n";	}
-	update			{ if (guard->location == field) { guard->location = cave; return "The guard paces into the cave.\n"; } else { guard->location = field; return "The guard paces into the field.\n"; }	}
-	contents		"He has"
-	health			100
-	capacity		20
-
 - player
 	description "yourself"
 	tags        "yourself"
-	location    field
-	details			"You would need a mirror to look at yourself.\n"
+	lightSource	1
+	location    deku_lobby
+	details			"As far as you can see, you look like any regular little boy in a bright green tunic.\n"
 	contents		"You have"
 	health			100
 	capacity		20
 
-- intoCave
-	condition		{ return guard->health == 0 || silver->location == guard; }
-	description "a cave entrance to the east"
-	integrated	"\0"
-	tags        "east", "entrance"
-	location    field
-	destination	cave
-	details			"The entrance is just a narrow opening in a small outcrop.\n"
-	textGo			"You walk into the cave.\n"
-	open				isAlreadyOpen
-
-- intoCaveBlocked
-	condition		{ return guard->health > 0 && silver->location != guard; }
-	description "a cave entrance to the east"
-	integrated	"\0"
-	tags        "east", "entrance"
-	location    field
-	prospect		cave
-	details			"The entrance is just a narrow opening in a small outcrop.\n"
-	textGo			"The guard stops you from walking into the cave.\n"
-	open				isAlreadyOpen
-
-- exitCave
-	description "an exit to the west"
-	integrated	"There is sunlight coming from the west."
-	tags        "west", "exit"
-	location    cave
-	destination field
-	details			"Sunlight pours in through an opening in the cave's wall.\n"
-	textGo			"You walk out of the cave.\n"
-	open				isAlreadyOpen
-
-- wallField
-	description "dense forest all around"
-	integrated	"There is a cave entrance in the rock wall to the east, and dense forest on all other sides."
-	tags        "west", "north", "south", "forest"
-	location    field
-	details			"The field is surrounded by trees and undergrowth.\n"
-	textGo			"Dense forest is blocking the way.\n"
-
-- wallCave
-	description "solid rock all around"
-	integrated	"You are surrounded on all sides by solid rock."
-	tags        "east", "north", "rock"
-	location    cave
-	details			"There is a crack in the southern wall.\n"
-	textGo			"Solid rock is blocking the way.\n"
-
-- backroom
-	description "a backroom"
-	tags				"backroom"
-	details			"The room is dusty and messy.\n"
+- deku_lobby
+	description "Deku tree lobby"
+	tags        "deku tree", "deku", "tree", "lobby", "main hall", "main"
+	details			"The inside of the Deku tree is hollowed into an irregular round chamber, going up several floors.\n"
 	capacity		9999
 
-- wallBackroom
-	description "solid rock all around"
-	integrated	"This appears to be only one exit."
-	tags				"east", "west", "south", "rock"
-	location		backroom
-	details			"Trendy wallpaper covers the rock walls.\n"
-	textGo			"Solid rock is blocking the way.\n"
+- deku_level2
+	description "above Deku tree lobby"
+	tags        "lobby", "main hall", "upper level"
+	details			"This level of the Deku tree's main hall consists of sloping ledges winding around the walls of the chamber.\n"
+	capacity		9999
 
-- openDoorToBackroom
-	description	"an open door to the south"
-	integrated	"There is an open door leading into some sort of backroom to the south."
-	tags				"south", "door", "doorway"
-	destination	backroom
-	details			"The door is open.\n"
-	textGo			"You walk through the door into a backroom.\n"
+- deku_level3
+	description "high above Deku tree lobby"
+	tags        "lobby", "main hall", "upper level"
+	details			"The top floor of the main hall is made up wooden plank walkways between four protruding wooden platforms.\n"
+	capacity		9999
+
+- deku_basementPool
+	description "the Deku tree's basement pool"
+	tags        "pool", "basement"
+	details			"The top floor of the main hall is made up wooden plank walkways between four protruding wooden platforms.\n"
+	capacity		9999
+
+- deku_lobbyLadder
+	description "a ladder against the wall"
+	tags        "up", "ladder"
+	location    deku_lobby
+	destination	deku_level2
+	details			"The ladder is more of a tangle of dried vines and branches, leading upward onto a ledge on the second floor.\n"
+	textGo			"You climb the ladder onto the ledge above.\n"
+
+- deku_downFrom2ndFloor
+	description "the edge of the walkway"
+	tags        "down", "ledge", "edge"
+	location    deku_level2
+	destination	deku_lobby
+	details			"The edge of this floor sharply drops off to the first floor a short distance below.\n"
+	textGo			"You throw caution to the wind and leap off the ledge onto the floor below. Luckily, you land solidly on your feet.\n"
+
+- deku_2ndLadder
+	description "a ladder against the wall"
+	tags        "up", "ladder", "vines"
+	location    deku_level2
+	destination	deku_level3
+	details			"The ladder is more of a tangle of dried vines and branches, leading upward onto a ledge on the top floor.\n"
+	textGo			"You climb the ladder onto the ledge above.\n"
+
+- deku_downToSecondFloor
+	description "a vine ladder against the outer wall"
+	tags        "down", "ladder"
+	location    deku_level3
+	destination	deku_level2
+	details			"The ladder from the floor beneath continues on the wall on this floor, ending at the ceiling directly above you.\n"
+	textGo			"You climb back down the ladder onto the ledge below.\n"
+
+- deku_jumpFromTopWeb
+	condition		{ return deku_webPitLobby->location == deku_lobby;	}
+	description "ledges reaching towards the middle of the room"
+	tags        "ledge", "edge", "middle", "center", "centre", "bottom"
+	location    deku_level3
+	destination	deku_basementPool
+	prospect		deku_lobby
+	details			"The edge of this floor sharply drops off to the first floor a short distance below.\n"
+	textGo			"You dive gracefully off the protruding edge and smack face-first into the web covering the pit below. The web stretches alarmingly, and just when it it about to recoil and send you likely careening into the ceiling, the surface snaps, and you go tumbling ungracefully down the chute and into the ice-cold water far below with a shock.\n"
+
+- deku_jumpFromTop
+	condition		{ return deku_weblessPitLobby->location == deku_lobby;	}
+	description " "
+	integrated	"\0"
+	tags        "down", "ledge", "edge", "middle", "center", "centre", "bottom"
+	location    deku_level3
+	destination	deku_basementPool
+	details			"The edge of this floor sharply drops off to the first floor a short distance below.\n"
+	textGo			"You dive gracefully off the protruding edge, through the chute beneath, and into the ice-cold water far below.\n"
+
+- deku_basementLadder
+	description "a tangle of vines up the east wall"
+	tags        "up", "ladder", "vines"
+	location    deku_basementPool
+	destination	deku_lobby
+	details			"The ladder is more of a tangle of dried vines and branches, leading up the chute above.\n"
+	textGo			"You climb back up the chute.\n"
+
+- deku_webPitLobby
+	description "a web-covered pit"
+	tags        "down", "pit", "web"
+	location    deku_lobby
+	prospect		deku_basementPool
+	details			"The pit is covered by a thick, elastic layer of web. You can see water at the bottom of a circular shaft.\n"
+	textGo			"You stand on the web, but that's as far as you go.\n"
+	open				{return "The web is too strong to tear with your hands.\n";}
+	update			{	if (deku_webPitLobby->location == deku_lobby){if (player->location == deku_basementPool){ toggleReplace(deku_webPitLobby, deku_weblessPitLobby);}} return "";}
+
+- deku_weblessPitLobby
+	description "a gaping pit"
+	tags        "down", "pit", "web"
+	destination	deku_basementPool
+	details			"The web is gone from the pit. You can see water at the bottom of a circular shaft.\n"
+	textGo			"You leap into the pit and plummet a long way, hitting the deep water at the bottom with a shock.\n"
 	open				isAlreadyOpen
-	close				{ toggleReplace(openDoorToBackroom, closedDoorToBackroom); toggleReplace(openDoorToCave, closedDoorToCave); return "You close the door.\n"; }
 
-- closedDoorToBackroom
-	description	"a closed door to the south"
-	integrated	"There is a closed door to the south."
-	tags				"south", "door", "doorway"
-	location		caveMaze3
-	prospect		backroom
-	details			"The door is closed.\n"
-	textGo			"The door is closed.\n"
-	open				{ toggleReplace(openDoorToBackroom, closedDoorToBackroom); toggleReplace(openDoorToCave, closedDoorToCave); return "You open the door.\n"; }
-	close				isAlreadyClosed
-
-- openDoorToCave
-	description	"an open door to the north"
-	integrated	"There is an open door leading into a cave to your north."
-	tags				"north", "door", "doorway"
-	destination	caveMaze3
-	details			"The door is open.\n"
-	textGo			"You walk through the door into a backroom.\n"
-	open				isAlreadyOpen
-	close				{ return (*openDoorToBackroom->close)(); }
-
-- closedDoorToCave
-	description	"an closed door to the north"
-	integrated	"There is a closed door in the north wall."
-	tags				"north", "door", "doorway"
-	location		backroom
-	prospect		caveMaze3
-	details			"The door is closed.\n"
-	textGo			"The door is closed.\n"
-	open				{ return (*closedDoorToBackroom->open)(); }
-	close				isAlreadyClosed
-
-- openBox
-	description	"a wooden box"
-	tags				"box", "wooden box"
-	details			"The box is open.\n"
-	weight			5
-	capacity		10
-	open				isAlreadyOpen
-	close				{ toggleReplace(openBox, closedBox); return "You close the box.\n"; }
-	lock				isStillOpen
-	unlock			isAlreadyOpen
-
-- closedBox
-	description	"a wooden box"
-	tags				"box", "wooden box"
-	details			"The box is closed.\n"
-	weight			5
-	open				{ toggleReplace(openBox, closedBox); return "You open the box.\n"; }
-	close				isAlreadyClosed
-	lock				{ toggleReplace(lockedBox, closedBox); return "You lock the box.\n"; }
-	unlock			isAlreadyUnlocked
-
-- lockedBox
-	description	"a wooden box"
-	tags				"box", "wooden box"
-	details			"The box is closed.\n"
-	location		backroom
-	weight			5
-	open				isStillLocked
-	close				isAlreadyClosed
-	lock				isAlreadyLocked
-	unlock			{ toggleReplace(lockedBox, closedBox); return "You unlock the box.\n"; }
-
-- keyForBox
-	description	"a tiny key"
-	tags				"key", "tiny key"
-	location		cave
-	details			"The key is really small and shiny.\n"
-	weight			1
-
-- lampOff
-	description	"a lamp"
-	tags				"lamp"
-	location		field
-	details			"The lamp is off.\n"
-	light				{	return lampOff->turnOn();	}
-	extinguish	isAlreadyExtinguished
-	turnOff			isAlreadyOff
-	turnOn			{ toggleReplace(lampOn, lampOff); return "You turn on the lamp.\n"; }
-	weight			5
-
-- lampOn
-	description	"a lamp"
-	tags				"lamp"
-	lightSource	1
-	details			"The lamp is on.\n"
-	light				isAlreadyLit
-	extinguish	{	return lampOn->turnOff();	}
-	turnOn			isAlreadyOn
-	turnOff			{ toggleReplace(lampOn, lampOff); return "You turn off the lamp.\n"; }
-	weight			5
-
-- thief
-	description	"a sneaky thief"
-	tags				"thief", "robber", "scoundrel"
-	location		caveMaze1
-	details			"The thief is prowling the corridors looking for something to steal."
-	update			thiefUpdate
+- deku_wallLobby
+	description "living wood surrounding you"
+	tags        "west", "north", "east", "wall", "walls"
+	location    deku_lobby
+	details			"The Deku tree is growing all around you. You can feel the life coursing through these living walls, but you also sense something terribly wrong eating away deep within.\n"
+	textGo			"You can't walk through the wood of the tree.\n"

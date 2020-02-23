@@ -34,6 +34,8 @@ BEGIN {
    prop["customAsk"] = "NULL";
    prop["customEat"] = "NULL";
    prop["customDrink"] = "NULL";
+   prop["customClimb"] = "NULL";
+   prop["customJumpOff"] = "NULL";
    prop["update"] = "NULL";
    prop["lightSource"] = "0"
    prop["integrated"] = "NULL"
@@ -109,6 +111,8 @@ function outputRecord(separator)
          print "\t\t" prop["customAsk"] ",";
          print "\t\t" prop["customEat"] ",";
          print "\t\t" prop["customDrink"] ",";
+         print "\t\t" prop["customClimb"] ",";
+         print "\t\t" prop["customJumpOff"] ",";
          print "\t\t" prop["update"] ",";
          print "\t\t" prop["lightSource"] ",";
          print "\t\t" prop["integrated"];

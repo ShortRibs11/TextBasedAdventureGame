@@ -1,19 +1,12 @@
 digraph map {
 	node [style=filled, fillcolor=grey]
-	field [fillcolor=white]
-	cave -> caveMaze1
-	caveMaze1 -> cave
-	caveMaze1 -> caveMaze2
-	caveMaze2 -> caveMaze3
-	caveMaze3 -> caveMaze4
-	caveMaze4 -> caveMaze1
-	caveMaze1 -> caveMaze4
-	caveMaze4 -> caveMaze3
-	caveMaze3 -> caveMaze2
-	caveMaze2 -> caveMaze1
-	field -> cave
-	field -> cave [style=dashed]
-	cave -> field
-	caveMaze3 -> backroom [style=dashed]
-	backroom -> caveMaze3 [style=dashed]
+	deku_lobby -> deku_level2
+	deku_level2 -> deku_lobby
+	deku_level2 -> deku_level3
+	deku_level3 -> deku_level2
+	deku_level3 -> deku_basementPool
+	deku_level3 -> deku_lobby [style=dashed]
+	deku_level3 -> deku_basementPool
+	deku_basementPool -> deku_lobby
+	deku_lobby -> deku_basementPool [style=dashed]
 }

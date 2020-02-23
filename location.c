@@ -3,6 +3,7 @@
 #include "misc.h"
 #include "match.h"
 #include "world.h"
+#include "parser.h"
 #include "noun.h"
 
 static int needLookAround = 0;
@@ -58,6 +59,26 @@ static void movePlayer(OBJECT *passage) {
 		triggerWorldUpdate();
 		executeLookAround();
 	}
+}
+
+int executeNorth(void) {
+	return parseAndExecute("go north");
+}
+int executeEast(void) {
+	return parseAndExecute("go east");
+}
+int executeSouth(void) {
+	return parseAndExecute("go south");
+}
+int executeWest(void) {
+	return parseAndExecute("go west");
+}
+int executeUp(void) {
+//	printf("Going up\n");
+	return parseAndExecute("go up");
+}
+int executeDown(void) {
+	return parseAndExecute("go down");
 }
 
 int executeGo(void) {

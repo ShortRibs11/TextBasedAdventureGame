@@ -35,6 +35,12 @@ int parseAndExecute(char *input) {
 	static const COMMAND commands[] = {
 		{executeQuit				,	"quit"},
 		{executeWait				,	"wait"},
+		{executeNorth				,	"north"},
+		{executeSouth				,	"south"},
+		{executeEast				,	"east"},
+		{executeWest				,	"west"},
+		{executeUp					,	"up"},
+		{executeDown				,	"down"},
 		{executeLookAround	,	"look"},
 		{executeLookAround	,	"look around"},
 		{executeLook				,	"look at A"},
